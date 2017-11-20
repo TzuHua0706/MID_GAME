@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>4.5.0</string>
         <key>fileName</key>
-        <string>C:/Users/姿樺/Desktop/new character.tps</string>
+        <string>C:/CocosProjects/img/new character.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -199,30 +199,30 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../../../CocosProjects/img/circle01.png</key>
-            <key type="filename">../../../CocosProjects/img/circle02.png</key>
-            <key type="filename">../../../CocosProjects/img/circle03.png</key>
-            <key type="filename">../../../CocosProjects/img/circle04.png</key>
-            <key type="filename">../../../CocosProjects/img/circle05.png</key>
-            <key type="filename">../../../CocosProjects/img/circle06.png</key>
-            <key type="filename">../../../CocosProjects/img/circle07.png</key>
-            <key type="filename">../../../CocosProjects/img/circle08.png</key>
-            <key type="filename">../../../CocosProjects/img/trangle01.png</key>
-            <key type="filename">../../../CocosProjects/img/trangle02.png</key>
-            <key type="filename">../../../CocosProjects/img/trangle03.png</key>
-            <key type="filename">../../../CocosProjects/img/trangle04.png</key>
-            <key type="filename">../../../CocosProjects/img/trangle05.png</key>
-            <key type="filename">../../../CocosProjects/img/trangle06.png</key>
-            <key type="filename">../../../CocosProjects/img/trangle07.png</key>
-            <key type="filename">../../../CocosProjects/img/trangle08.png</key>
-            <key type="filename">../../../CocosProjects/img/trapezoid01.png</key>
-            <key type="filename">../../../CocosProjects/img/trapezoid02.png</key>
-            <key type="filename">../../../CocosProjects/img/trapezoid03.png</key>
-            <key type="filename">../../../CocosProjects/img/trapezoid04.png</key>
-            <key type="filename">../../../CocosProjects/img/trapezoid05.png</key>
-            <key type="filename">../../../CocosProjects/img/trapezoid06.png</key>
-            <key type="filename">../../../CocosProjects/img/trapezoid07.png</key>
-            <key type="filename">../../../CocosProjects/img/trapezoid08.png</key>
+            <key type="filename">circle01.png</key>
+            <key type="filename">circle02.png</key>
+            <key type="filename">circle03.png</key>
+            <key type="filename">circle04.png</key>
+            <key type="filename">circle05.png</key>
+            <key type="filename">circle06.png</key>
+            <key type="filename">circle07.png</key>
+            <key type="filename">circle08.png</key>
+            <key type="filename">trangle01.png</key>
+            <key type="filename">trangle02.png</key>
+            <key type="filename">trangle03.png</key>
+            <key type="filename">trangle04.png</key>
+            <key type="filename">trangle05.png</key>
+            <key type="filename">trangle06.png</key>
+            <key type="filename">trangle07.png</key>
+            <key type="filename">trangle08.png</key>
+            <key type="filename">trapezoid01.png</key>
+            <key type="filename">trapezoid02.png</key>
+            <key type="filename">trapezoid03.png</key>
+            <key type="filename">trapezoid04.png</key>
+            <key type="filename">trapezoid05.png</key>
+            <key type="filename">trapezoid06.png</key>
+            <key type="filename">trapezoid07.png</key>
+            <key type="filename">trapezoid08.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -262,6 +262,30 @@
             <filename>../../../CocosProjects/img/trapezoid06.png</filename>
             <filename>../../../CocosProjects/img/trapezoid07.png</filename>
             <filename>../../../CocosProjects/img/trapezoid08.png</filename>
+            <filename>trangle06.png</filename>
+            <filename>trangle07.png</filename>
+            <filename>trangle08.png</filename>
+            <filename>trapezoid01.png</filename>
+            <filename>trapezoid02.png</filename>
+            <filename>trapezoid03.png</filename>
+            <filename>trapezoid04.png</filename>
+            <filename>trapezoid05.png</filename>
+            <filename>trapezoid06.png</filename>
+            <filename>trapezoid07.png</filename>
+            <filename>trapezoid08.png</filename>
+            <filename>circle01.png</filename>
+            <filename>circle02.png</filename>
+            <filename>circle03.png</filename>
+            <filename>circle04.png</filename>
+            <filename>circle05.png</filename>
+            <filename>circle06.png</filename>
+            <filename>circle07.png</filename>
+            <filename>circle08.png</filename>
+            <filename>trangle01.png</filename>
+            <filename>trangle02.png</filename>
+            <filename>trangle03.png</filename>
+            <filename>trangle04.png</filename>
+            <filename>trangle05.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

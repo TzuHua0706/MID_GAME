@@ -104,10 +104,10 @@
           <PlistImageFile Name="flame2_12.png" Key="flame2_12.png" />
           <PlistImageFile Name="flame2_13.png" Key="flame2_13.png" />
           <PlistImageFile Name="loadingbar.png" Key="loadingbar.png" />
-          <PlistImageFile Name="sliderProgress.png" Key="sliderProgress.png" />
-          <PlistImageFile Name="sliderTrack.png" Key="sliderTrack.png" />
           <PlistImageFile Name="sliderballnormal.png" Key="sliderballnormal.png" />
           <PlistImageFile Name="sliderballpressed.png" Key="sliderballpressed.png" />
+          <PlistImageFile Name="sliderProgress.png" Key="sliderProgress.png" />
+          <PlistImageFile Name="sliderTrack.png" Key="sliderTrack.png" />
           <PlistImageFile Name="triblock.png" Key="triblock.png" />
           <PlistImageFile Name="triouter.png" Key="triouter.png" />
           <PlistImageFile Name="trishadow.png" Key="trishadow.png" />
@@ -129,7 +129,6 @@
         <Audio Name="arrivalsfinalsound.mp3" />
         <Project Name="bg_line.csd" Type="Node" />
         <Fnt Name="couriernew32.fnt" />
-        <Project Name="fire.csd" Type="Node" />
         <Audio Name="gain point.mp3" />
         <Project Name="gameScene.csd" Type="Scene" />
         <Fnt Name="hansans48.fnt" />
