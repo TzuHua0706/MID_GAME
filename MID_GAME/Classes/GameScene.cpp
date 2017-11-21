@@ -31,6 +31,7 @@ GameScene::~GameScene()
 
 }
 void GameScene::get_character(unsigned int number, cocos2d::Color3B color) {
+	//character = Sprite::createWithSpriteFrameName("cuber01.png");
 	character = ch->set_character(animation_character[number], color,true);
 	character->setPosition(1050, 390);
 	auto chAction = (ActionTimeline *)CSLoader::createTimeline(animation_character[number]);
@@ -81,6 +82,17 @@ bool GameScene::init()
 	//jump
 	this->jump = Rect(origin.x + 50, origin.y + 50, visibleSize.width - 100, visibleSize.height - 100);
 
+	//obstacle½d³ò
+	/*Size s_ob = obstacle->getContentSize();
+	Point p_ob = obstacle->getPosition();
+	rect_ob = Rect(p_ob.x - s_ob.width / 2, p_ob.y - s_ob.height / 2, s_ob.width, s_ob.height);*/
+	//character½d³ò
+	/*Size s_ch = character->getContentSize();
+	Point p_ch = character->getPosition();
+	rect_ch = Rect(p_ch.x - s_ch.width / 2, p_ch.y - s_ch.height / 2, s_ch.width, s_ch.height);*/
+	obstacle = g_obstacle->set_obstacle(1);
+	gamescene->addChild(obstacle);
+
 	//Ä²¸I
 	_listener1 = EventListenerTouchOneByOne::create();
 	_listener1->onTouchBegan = CC_CALLBACK_2(GameScene::onTouchBegan, this);
@@ -94,13 +106,23 @@ bool GameScene::init()
 }
 void GameScene::doStep(float dt)
 {
-	fin_time += dt;
+	/*fin_time += dt;
 	ob_time += dt;
-	if (ob_time >= 1 && fin_time < 5) {
+	float scale = ((2 * rand() + 1) % 6 + 4) *0.1;
+	if (ob_time >= 1 && fin_time < 20) {
 		ob_time = 0;
-		obstacle = g_obstacle->set_obstacle(1);
+		obstacle = g_obstacle->set_obstacle(scale);
 		gamescene->addChild(obstacle);
-	}
+	}*/
+	//character½d³ò
+	Size s_ch = Size(240, 210);
+	Point p_ch = character->getPosition();
+	rect_ch = Rect(p_ch.x - s_ch.width / 2, p_ch.y - s_ch.height / 2, s_ch.width, s_ch.height);
+	Point p_ob = obstacle->getPosition(); 
+	/*p_ob.y = 285;
+	if (rect_ch.containsPoint(p_ob)) {
+		log("sad");
+	}*/
 }
 void GameScene::bt_home_event(Ref *pSender, Widget::TouchEventType type) {
 	if (scene_btn) {
@@ -133,7 +155,7 @@ void GameScene::bt_music_event(Ref *pSender, Widget::TouchEventType type) {
 bool  GameScene::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)//Ä²¸I¶}©l¨Æ¥ó
 {
 	Point touchLoc = pTouch->getLocation();
-	if (jump.containsPoint(touchLoc)) { 
+	if (jump.containsPoint(touchLoc)) {
 		if (jump_flag) {
 			jump_flag = false;
 			auto body = character->getChildByName("player");
@@ -141,6 +163,7 @@ bool  GameScene::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)//Ä
 			body->runAction(Sequence::create(ch->jump(character), callback, NULL));
 		}
 	}
+	if (rect_ch.containsPoint(touchLoc)) { log("sad"); }
 	return true;
 }
 void  GameScene::onTouchMoved(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) //Ä²¸I²¾°Ê¨Æ¥ó
@@ -153,7 +176,5 @@ void  GameScene::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) //
 }
 void GameScene::actionFinished()
 {
-	// do something on complete
-	CCLOG("action completed!");
 	jump_flag = true;
 }

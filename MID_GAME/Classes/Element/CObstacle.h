@@ -16,5 +16,6 @@ public:
 	~CObstacle();
 
 	cocos2d::Node * set_obstacle(float scale);
+
 };
 #pragma once

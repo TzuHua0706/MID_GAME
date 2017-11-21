@@ -328,7 +328,5 @@ void  HelloWorld::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) /
 }
 void HelloWorld::action_character()
 {
-	// do something on complete
-	CCLOG("action completed!");
 	ch_action = true;
 }

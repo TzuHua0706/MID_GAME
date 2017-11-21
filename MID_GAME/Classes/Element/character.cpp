@@ -36,6 +36,27 @@ cocos2d::Node * character::set_character(char * name, Color3B color, bool select
 	}
 	return(character_name);
 }
+cocos2d::Node * character::face_character(cocos2d::Node * player, int face) {//face 0:normal 1:happy 2:sad
+	auto sad = player->getChildByName("sad");
+	auto happy = player->getChildByName("happy");
+	auto normal = player->getChildByName("normal");
+	if (face == 0) {
+		normal->setVisible(true);
+		sad->setVisible(false);
+		happy->setVisible(false);
+	}
+	else if (face == 1) {
+		normal->setVisible(false);
+		sad->setVisible(false);
+		happy->setVisible(true);
+	}
+	else {
+		normal->setVisible(false);
+		sad->setVisible(true);
+		happy->setVisible(false);
+	}
+	return(player);
+}
 cocos2d::Spawn * character::ani_character(cocos2d::Node * player,int scale, cocos2d::Color3B color)//scale  0最小 1中間 2最大
 {
 	auto shadow = player->getChildByName("shadow");
@@ -83,13 +104,13 @@ cocos2d::EaseOut * character::jump(cocos2d::Node * player) {
 	auto face = player->getChildByName("normal");
 	Point body_seat = body->getPosition();
 	Point face_seat = face->getPosition();
-	auto body_jumpAction = cocos2d::JumpTo::create(0.8f, body_seat, 280, 1);
+	auto body_jumpAction = cocos2d::JumpTo::create(1.4f, body_seat, 280, 1);
 	auto body_jumpSineIn = EaseOut::create(body_jumpAction, 1);
-	auto face_jumpAction = cocos2d::JumpTo::create(0.8f, face_seat, 280, 1);
+	auto face_jumpAction = cocos2d::JumpTo::create(1.4f, face_seat, 280, 1);
 	auto face_jumpSineIn = EaseOut::create(face_jumpAction, 1);
 	body->runAction(body_jumpSineIn);
 	face->runAction(face_jumpSineIn);
-	ScaleBy * scaleby = ScaleBy::create(0.4f, 0.5f);
+	ScaleBy * scaleby = ScaleBy::create(0.7f, 0.5f);
 	auto scalebyBack = scaleby->reverse();
 	auto sequence = Sequence::create(scaleby, scalebyBack, NULL);
 	shadow->runAction(sequence);

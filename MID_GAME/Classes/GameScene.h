@@ -28,6 +28,8 @@ public:
 	cocos2d::ui::Button * btn_music;
 	cocos2d::ui::Button * btn_home;
 	cocos2d::Rect jump;
+	cocos2d::Rect rect_ch;
+	cocos2d::Rect rect_ob;
 
 	bool jump_flag = true;
 	bool scene_btn = true;
