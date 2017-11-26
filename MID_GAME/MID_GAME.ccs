@@ -44,6 +44,8 @@
           <PlistImageFile Name="replay_t.png" Key="replay_t.png" />
           <PlistImageFile Name="setting.png" Key="setting.png" />
           <PlistImageFile Name="setting_t.png" Key="setting_t.png" />
+          <PlistImageFile Name="start.png" Key="start.png" />
+          <PlistImageFile Name="start_t.png" Key="start_t.png" />
           <PlistImageFile Name="stop.png" Key="stop.png" />
           <PlistImageFile Name="stop_t.png" Key="stop_t.png" />
           <PlistImageFile Name="x.png" Key="x.png" />

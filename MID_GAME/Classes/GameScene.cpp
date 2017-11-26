@@ -62,7 +62,7 @@ bool GameScene::init()
 	//Stop button
 	btn_stop = new C3SButton("stop.png", "stop_t.png", "stop.png", true);
 	btn_stop->img_btn->setPosition(1235, 680);
-	btn_stop->img_btn->setScale(0.8);
+	btn_stop->img_btn->setScale(0.8f);
 	gamescene->addChild(btn_stop->img_btn);
 
 	//Jump
