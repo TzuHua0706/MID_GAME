@@ -25,19 +25,5 @@
         <LastRunType Value="Windows" />
       </Value>
     </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="MainScene.csd" />
-          <FilePathData Path="gameScene.csd" />
-          <FilePathData Path="runner_cuber.csd" />
-          <FilePathData Path="runner_trapezoid.csd" />
-          <FilePathData Path="runner_trangle.csd" />
-          <FilePathData Path="runner_circle.csd" />
-          <FilePathData Path="triangleNode.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="triangleNode.csd" />
-      </Value>
-    </Item>
   </Properties>
 </UserData>

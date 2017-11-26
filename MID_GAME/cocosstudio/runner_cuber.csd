@@ -55,7 +55,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="PlistSubImage" Path="cuber01.png" Plist="scene101.plist" />
+            <FileData Type="PlistSubImage" Path="cuber07.png" Plist="scene101.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="sad" ActionTag="-718370652" VisibleForFrame="False" Tag="56" IconVisible="True" LeftMargin="-2.3013" RightMargin="2.3013" TopMargin="-3.2166" BottomMargin="3.2166" ctype="SingleNodeObjectData">

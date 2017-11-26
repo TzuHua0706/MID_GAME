@@ -4,51 +4,53 @@
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "ui/UIWidget.h"
-#include "SimpleAudioEngine.h"
 
 #include "basic.h"
-#include "./Element/character.h"
+#include "./Element/C_character.h"
+#include "./Element/C3SButton.h"
 #include "./Element/CObstacle.h"
 
 class GameScene : public cocos2d::Layer
 {
 private:
-
+	CObstacle * g_obstacle[2] = { NULL,NULL };
+	C_character * C_player;
+	C3SButton * btn_stop;
 public:
 	GameScene();
 	~GameScene();
 
-	character * ch;
-	CObstacle * g_obstacle;
-
 	cocos2d::Node * gamescene;
-	cocos2d::Node * character;
-	cocos2d::Node * obstacle;
 	cocostudio::ComAudio * bkmusic;
+	cocos2d::ui::Text * score_text;
 	cocos2d::ui::Button * btn_music;
-	cocos2d::ui::Button * btn_home;
+	cocos2d::ui::LoadingBar * blood;
 	cocos2d::Rect jump;
 	cocos2d::Rect rect_ch;
-	cocos2d::Rect rect_ob;
+	cocos2d::Vec2 origin;
+	cocos2d::Size visibleSize;
 
+	float level;
+	int ob = 0;
+	int score = 0;
+	char Score[10];
 	bool jump_flag = true;
-	bool scene_btn = true;
-	bool music_open = true;
+	bool stop_touch = false;
+	bool ob_flag = true;
+	bool music_flag = true;
+	bool touch_ob = true;
+	float face_time = 0;
 	float ob_time = 0;
 	float fin_time = 0;
-	char animation_character[NUMBER][25] = { RUN_1, RUN_2, RUN_3, RUN_4 };
 
-	// there's no 'id' in cpp, so we recommend returning the class instance pointer
-	static cocos2d::Scene* createScene();
 	void doStep(float dt);
 
-	// Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
 	virtual bool init();
 
-	void actionFinished();
-	void get_character(unsigned int number, cocos2d::Color3B color);
+	cocos2d::RenderTexture *renderTexture;
+	void jumpFinished();
+	void get_character(C_character * player, float get_level);
 	void bt_music_event(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
-	void bt_home_event(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	//Ä²¸I
 	cocos2d::EventListenerTouchOneByOne *_listener1;

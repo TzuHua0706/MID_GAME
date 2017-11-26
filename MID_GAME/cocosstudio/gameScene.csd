@@ -274,21 +274,6 @@
             <FileData Type="PlistSubImage" Path="s101bgimg.png" Plist="scene101bg.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Button_home" ActionTag="1060928462" Tag="32" IconVisible="False" LeftMargin="1205.6327" RightMargin="28.3673" TopMargin="659.6580" BottomMargin="24.3420" TouchEnable="True" FontSize="14" ButtonText="Button" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="46.0000" Y="36.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="1228.6327" Y="42.3420" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.9599" Y="0.0588" />
-            <PreSize X="0.0359" Y="0.0500" />
-            <TextColor A="255" R="65" G="65" B="70" />
-            <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
-            <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
-            <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
           <AbstractNodeData Name="Button_music" CanEdit="False" ActionTag="-1662056861" Tag="32" IconVisible="False" LeftMargin="10.4100" RightMargin="1193.5900" TopMargin="3.1900" BottomMargin="642.8100" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="46" Scale9Height="52" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="76.0000" Y="74.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -304,20 +289,15 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Button_setting" CanEdit="False" ActionTag="-883394825" Tag="33" IconVisible="False" LeftMargin="1197.4800" RightMargin="6.5200" TopMargin="3.1900" BottomMargin="642.8100" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="46" Scale9Height="52" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="76.0000" Y="74.0000" />
+          <AbstractNodeData Name="LoadingBar_Blood" CanEdit="False" ActionTag="1816031880" Tag="39" IconVisible="False" LeftMargin="977.0000" RightMargin="173.0000" TopMargin="478.5000" BottomMargin="224.5000" ProgressInfo="100" ctype="LoadingBarObjectData">
+            <Size X="130.0000" Y="17.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="1235.4800" Y="679.8100" />
-            <Scale ScaleX="0.8000" ScaleY="0.8000" />
+            <Position X="1042.0000" Y="233.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.9652" Y="0.9442" />
-            <PreSize X="0.0594" Y="0.1028" />
-            <TextColor A="255" R="65" G="65" B="70" />
-            <DisabledFileData Type="PlistSubImage" Path="setting.png" Plist="new icon.plist" />
-            <PressedFileData Type="PlistSubImage" Path="setting_t.png" Plist="new icon.plist" />
-            <NormalFileData Type="PlistSubImage" Path="setting.png" Plist="new icon.plist" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
+            <PrePosition X="0.8141" Y="0.3236" />
+            <PreSize X="0.1016" Y="0.0236" />
+            <ImageFileData Type="PlistSubImage" Path="loadingbar.png" Plist="scene101.plist" />
           </AbstractNodeData>
           <AbstractNodeData Name="music_bg" CanEdit="False" ActionTag="1160850142" Tag="34" IconVisible="True" LeftMargin="132.6597" RightMargin="1147.3403" TopMargin="39.7953" BottomMargin="680.2047" Volume="1.0000" Loop="True" ctype="SimpleAudioObjectData">
             <Size X="0.0000" Y="0.0000" />
@@ -329,14 +309,14 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="SR_bg.mp3" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="score" CanEdit="False" ActionTag="-1221744370" Tag="127" IconVisible="False" LeftMargin="619.5000" RightMargin="619.5000" TopMargin="75.8700" BottomMargin="558.1300" FontSize="80" LabelText="0" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-            <Size X="41.0000" Y="86.0000" />
+          <AbstractNodeData Name="score" CanEdit="False" ActionTag="-1221744370" Tag="127" IconVisible="False" LeftMargin="509.5000" RightMargin="509.5000" TopMargin="75.8700" BottomMargin="558.1300" FontSize="80" LabelText="Score : 0" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+            <Size X="261.0000" Y="86.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="640.0000" Y="601.1300" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="26" G="35" B="74" />
             <PrePosition X="0.5000" Y="0.8349" />
-            <PreSize X="0.0320" Y="0.1194" />
+            <PreSize X="0.2039" Y="0.1194" />
             <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
             <OutlineColor A="255" R="144" G="238" B="144" />
             <ShadowColor A="255" R="255" G="255" B="255" />

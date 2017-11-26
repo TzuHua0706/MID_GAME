@@ -1,5 +1,6 @@
 #include "GameScene.h"
 #include "HelloWorldScene.h"
+#include "StopScene.h"
 
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
@@ -9,43 +10,19 @@ USING_NS_CC;
 using namespace cocostudio::timeline;
 using namespace ui;
 
-Scene* GameScene::createScene()
-{
-	// 'scene' is an autorelease object
-	auto scene = Scene::create();
-
-	// 'layer' is an autorelease object
-	auto layer = GameScene::create();
-
-	// add layer as a child to scene
-	scene->addChild(layer);
-
-	// return the scene
-	return scene;
-}
-GameScene::GameScene()
-{
-}
-GameScene::~GameScene()
-{
-
-}
-void GameScene::get_character(unsigned int number, cocos2d::Color3B color) {
-	//character = Sprite::createWithSpriteFrameName("cuber01.png");
-	character = ch->set_character(animation_character[number], color,true);
-	character->setPosition(1050, 390);
-	auto chAction = (ActionTimeline *)CSLoader::createTimeline(animation_character[number]);
-	character->runAction(chAction);
-	chAction->gotoFrameAndPlay(0, 24, true);
-	gamescene->addChild(character);
+GameScene::GameScene(){}
+GameScene::~GameScene(){}
+void GameScene::get_character(C_character * player, float get_level) {
+	C_player = new C_character(player->Player, player->Color);
+	C_player->character->setPosition(1050, 360);
+	gamescene->addChild(C_player->set_character(true));
+	level = get_level;
 }
 bool GameScene::init()
 {
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	visibleSize = Director::getInstance()->getVisibleSize();
+	origin = Director::getInstance()->getVisibleOrigin();
 
-	//////////////////////////////
-	// 1. super init first
 	if (!Layer::init())
 	{
 		return false;
@@ -60,14 +37,20 @@ bool GameScene::init()
 	dancer->gotoFrameAndPlay(0, 72, true);
 
 	//Music
-	/*bkmusic = (cocostudio::ComAudio *)gamescene->getChildByName("music_bg")->getComponent("music_bg");
-	bkmusic->playBackgroundMusic();*/
+	bkmusic = (cocostudio::ComAudio *)gamescene->getChildByName("music_bg")->getComponent("music_bg");
+	bkmusic->playBackgroundMusic();
 
 	//Music button
 	btn_music = dynamic_cast<Button*>(gamescene->getChildByName("Button_music"));
 	btn_music->addTouchEventListener(CC_CALLBACK_2(GameScene::bt_music_event, this));
 
-	//background line
+	//LoadingBar Blood
+	blood = (cocos2d::ui::LoadingBar *)gamescene->getChildByName("LoadingBar_Blood");
+
+	//Score
+	score_text = (cocos2d::ui::Text *)gamescene->getChildByName("score");
+
+	//Background line
 	auto bg_line = CSLoader::createNode("bg_line.csb");
 	bg_line->setPosition(640, 353);
 	gamescene->addChild(bg_line);
@@ -75,25 +58,16 @@ bool GameScene::init()
 	bg_line->runAction(line_Action);
 	line_Action->gotoFrameAndPlay(0, 10, true);
 
-	//home button
-	btn_home = dynamic_cast<Button*>(gamescene->getChildByName("Button_home"));
-	btn_home->addTouchEventListener(CC_CALLBACK_2(GameScene::bt_home_event, this));
+	//Stop button
+	btn_stop = new C3SButton("stop.png", "stop_t.png", "stop.png", true);
+	btn_stop->img_btn->setPosition(1235, 680);
+	btn_stop->img_btn->setScale(0.8);
+	gamescene->addChild(btn_stop->img_btn, 2);
 
-	//jump
+	//Jump
 	this->jump = Rect(origin.x + 50, origin.y + 50, visibleSize.width - 100, visibleSize.height - 100);
 
-	//obstacle範圍
-	/*Size s_ob = obstacle->getContentSize();
-	Point p_ob = obstacle->getPosition();
-	rect_ob = Rect(p_ob.x - s_ob.width / 2, p_ob.y - s_ob.height / 2, s_ob.width, s_ob.height);*/
-	//character範圍
-	/*Size s_ch = character->getContentSize();
-	Point p_ch = character->getPosition();
-	rect_ch = Rect(p_ch.x - s_ch.width / 2, p_ch.y - s_ch.height / 2, s_ch.width, s_ch.height);*/
-	obstacle = g_obstacle->set_obstacle(1);
-	gamescene->addChild(obstacle);
-
-	//觸碰
+	//Touch
 	_listener1 = EventListenerTouchOneByOne::create();
 	_listener1->onTouchBegan = CC_CALLBACK_2(GameScene::onTouchBegan, this);
 	_listener1->onTouchMoved = CC_CALLBACK_2(GameScene::onTouchMoved, this);
@@ -106,45 +80,56 @@ bool GameScene::init()
 }
 void GameScene::doStep(float dt)
 {
-	/*fin_time += dt;
+	fin_time += dt;
 	ob_time += dt;
-	float scale = ((2 * rand() + 1) % 6 + 4) *0.1;
-	if (ob_time >= 1 && fin_time < 20) {
-		ob_time = 0;
-		obstacle = g_obstacle->set_obstacle(scale);
-		gamescene->addChild(obstacle);
-	}*/
-	//character範圍
-	Size s_ch = Size(240, 210);
-	Point p_ch = character->getPosition();
-	rect_ch = Rect(p_ch.x - s_ch.width / 2, p_ch.y - s_ch.height / 2, s_ch.width, s_ch.height);
-	Point p_ob = obstacle->getPosition(); 
-	/*p_ob.y = 285;
-	if (rect_ch.containsPoint(p_ob)) {
-		log("sad");
-	}*/
-}
-void GameScene::bt_home_event(Ref *pSender, Widget::TouchEventType type) {
-	if (scene_btn) {
-		removeChild(gamescene);
-		CCScene * scene = CCScene::create();
-		HelloWorld * layer = HelloWorld::create();
-		scene->addChild(layer);
-		CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(1.5f, scene));
-		scene_btn = false;
+	face_time += dt;
+	if (ob_flag && fin_time > 5 && fin_time < 22) {
+		//character範圍
+		Size s_ch = C_player->body->getContentSize();
+		Point p_ch = (C_player->body->getPosition()) + Point(1050, 360);
+		rect_ch = Rect(p_ch.x - s_ch.width / 2, p_ch.y - s_ch.height / 2, s_ch.width, s_ch.height);
+		if (ob_time >= level && fin_time < 20) {
+			float scale = ((2 * rand() + 1) % 6 + 4) *0.1;
+			ob_time = 0;
+			g_obstacle[ob] = new CObstacle;
+			gamescene->addChild(g_obstacle[ob]->set_obstacle(scale));
+			ob++;
+			ob = ob % 2;
+			touch_ob = true;
+		}
+		for (int i = 0; i < 2; i++) {
+			if (g_obstacle[i]) {
+				Point p_ob = g_obstacle[i]->Obstacle->getPosition();
+				if (p_ob.x > p_ch.x && p_ob.x < p_ch.x + s_ch.width / 2 && touch_ob) {
+					if (g_obstacle[i]->touch_obstacle(rect_ch, p_ob ,blood)) {
+						C_player->face_character(2);
+						face_time = 0;
+						touch_ob = false;
+					}
+					/*else {
+						score++;
+						sprintf(Score, "Score : %d", score);
+						score_text->setText(Score);
+						C_player->face_character(1);
+						face_time = 0;
+					}*/
+				}
+			}
+		}
+		if (face_time >= 0.5)C_player->face_character(0);
 	}
 }
 void GameScene::bt_music_event(Ref *pSender, Widget::TouchEventType type) {
 	switch (type)
 	{
 	case Widget::TouchEventType::BEGAN:
-		music_open = !music_open;
+		music_flag = !music_flag;
 		break;
 	case Widget::TouchEventType::MOVED:
 		break;
 	case Widget::TouchEventType::ENDED:
-		btn_music->setBright(music_open);
-		if (!music_open) { bkmusic->stopBackgroundMusic(); }
+		btn_music->setBright(music_flag);
+		if (!music_flag) { bkmusic->stopBackgroundMusic(); }
 		else bkmusic->playBackgroundMusic();
 		break;
 	case Widget::TouchEventType::CANCELED:
@@ -152,29 +137,44 @@ void GameScene::bt_music_event(Ref *pSender, Widget::TouchEventType type) {
 	default: break;
 	}
 }
-bool  GameScene::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)//觸碰開始事件
+bool GameScene::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)//觸碰開始事件
 {
 	Point touchLoc = pTouch->getLocation();
+	if (btn_stop->get_rect().containsPoint(touchLoc)) {
+		btn_stop->touch();
+		stop_touch = true;
+	}
 	if (jump.containsPoint(touchLoc)) {
 		if (jump_flag) {
 			jump_flag = false;
-			auto body = character->getChildByName("player");
-			auto callback = CallFunc::create(this, callfunc_selector(GameScene::actionFinished));
-			body->runAction(Sequence::create(ch->jump(character), callback, NULL));
+			auto body = C_player->character->getChildByName("player");
+			auto callback = CallFunc::create(this, callfunc_selector(GameScene::jumpFinished));
+			body->runAction(Sequence::create(C_player->jump(), callback, NULL));
 		}
 	}
-	if (rect_ch.containsPoint(touchLoc)) { log("sad"); }
 	return true;
 }
-void  GameScene::onTouchMoved(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) //觸碰移動事件
+void GameScene::onTouchMoved(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) //觸碰移動事件
 {
 	Point touchLoc = pTouch->getLocation();
 }
-void  GameScene::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) //觸碰結束事件 
+void GameScene::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) //觸碰結束事件 
 {
 	Point touchLoc = pTouch->getLocation();
+	if (stop_touch) {
+		stop_touch = false;
+		RenderTexture *renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height);
+		renderTexture->begin();
+		this->getParent()->visit();
+		renderTexture->end();
+		Scene * scene = Scene::create();
+		StopScene * layer = StopScene::create();
+		layer->get_character(C_player, level, renderTexture);
+		scene->addChild(layer);
+		Director::sharedDirector()->pushScene(scene);
+	}
 }
-void GameScene::actionFinished()
+void GameScene::jumpFinished()
 {
 	jump_flag = true;
 }

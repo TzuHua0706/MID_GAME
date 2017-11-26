@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>4.5.0</string>
         <key>fileName</key>
-        <string>C:/CocosProjects/img/new icon.tps</string>
+        <string>C:/MID/img/new icon.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -199,6 +199,8 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">home.png</key>
+            <key type="filename">home_t.png</key>
             <key type="filename">music.png</key>
             <key type="filename">music_n.png</key>
             <key type="filename">music_t.png</key>
@@ -213,6 +215,8 @@
             <key type="filename">setting_t.png</key>
             <key type="filename">stop.png</key>
             <key type="filename">stop_t.png</key>
+            <key type="filename">x.png</key>
+            <key type="filename">x_t.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -242,6 +246,10 @@
             <filename>stop.png</filename>
             <filename>stop_t.png</filename>
             <filename>next_n.png</filename>
+            <filename>home.png</filename>
+            <filename>home_t.png</filename>
+            <filename>x.png</filename>
+            <filename>x_t.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -30,6 +30,8 @@
           <PlistImageFile Name="trapezoid08.png" Key="trapezoid08.png" />
         </PlistImageFolder>
         <PlistImageFolder Image="new icon.png" PListFile="new icon.plist" Name=".new icon_PList.Dir">
+          <PlistImageFile Name="home.png" Key="home.png" />
+          <PlistImageFile Name="home_t.png" Key="home_t.png" />
           <PlistImageFile Name="music.png" Key="music.png" />
           <PlistImageFile Name="music_n.png" Key="music_n.png" />
           <PlistImageFile Name="music_t.png" Key="music_t.png" />
@@ -44,6 +46,8 @@
           <PlistImageFile Name="setting_t.png" Key="setting_t.png" />
           <PlistImageFile Name="stop.png" Key="stop.png" />
           <PlistImageFile Name="stop_t.png" Key="stop_t.png" />
+          <PlistImageFile Name="x.png" Key="x.png" />
+          <PlistImageFile Name="x_t.png" Key="x_t.png" />
         </PlistImageFolder>
         <PlistImageFolder Image="scene101.png" PListFile="scene101.plist" Name=".scene101_PList.Dir">
           <PlistImageFile Name="bean1_01.png" Key="bean1_01.png" />

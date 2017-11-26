@@ -1,5 +1,6 @@
 #include "HelloWorldScene.h"
 #include "GameScene.h"
+#include "SettingScene.h"
 
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
@@ -25,6 +26,7 @@ Scene* HelloWorld::createScene()
 }
 HelloWorld::HelloWorld()
 {
+
 }
 HelloWorld::~HelloWorld()
 {
@@ -33,8 +35,8 @@ HelloWorld::~HelloWorld()
 // on "init" you need to initialize your instance
 bool HelloWorld::init()
 {
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	visibleSize = Director::getInstance()->getVisibleSize();
+	origin = Director::getInstance()->getVisibleOrigin();
 
 	//////////////////////////////
 	// 1. super init first
@@ -46,78 +48,69 @@ bool HelloWorld::init()
 	addChild(helloscene);
 
 	//Music
-	/*bkmusic = (cocostudio::ComAudio *)helloscene->getChildByName("music_bg")->getComponent("music_bg");
-	bkmusic->playBackgroundMusic();*/
+	bkmusic = (cocostudio::ComAudio *)helloscene->getChildByName("music_bg")->getComponent("music_bg");
+	bkmusic->playBackgroundMusic();
 
-	//Music button
+	//Music Button
 	btn_music = dynamic_cast<Button*>(helloscene->getChildByName("Button_music"));
 	btn_music->addTouchEventListener(CC_CALLBACK_2(HelloWorld::bt_music_event, this));
 
-	//play button
+	//Play Button
 	btn_play = dynamic_cast<Button*>(helloscene->getChildByName("Button_play"));
 	btn_play->addTouchEventListener(CC_CALLBACK_2(HelloWorld::bt_play_event, this));
 
-	//animation
+	//Animation
 	auto dancer = (ActionTimeline *)CSLoader::createTimeline("MainScene.csb");
 	helloscene->runAction(dancer);
 	dancer->gotoFrameAndPlay(0, 72, true);
 
-	//character button left
+	//Character Button left
 	btn_character_left = dynamic_cast<Button*>(helloscene->getChildByName("Button_left"));
 	btn_character_left->addTouchEventListener(CC_CALLBACK_2(HelloWorld::bt_character_event_left, this));
-	//character button right
+	//Character Button right
 	btn_character_right = dynamic_cast<Button*>(helloscene->getChildByName("Button_right"));
 	btn_character_right->addTouchEventListener(CC_CALLBACK_2(HelloWorld::bt_character_event_right, this));
 
-	// Level botton
-	btn_level_left = dynamic_cast<Button*>(helloscene->getChildByName("Button_left_0"));
-	btn_level_left->addTouchEventListener(CC_CALLBACK_2(HelloWorld::bt_level_event_left, this));
-	btn_level_right = dynamic_cast<Button*>(helloscene->getChildByName("Button_right_0"));
-	btn_level_right->addTouchEventListener(CC_CALLBACK_2(HelloWorld::bt_level_event_right, this));
+	//Level Botton
+	btn_level_left = new C3SButton("next.png","next_t.png","next_n.png",true);
+	btn_level_left->img_btn->setPosition(510, 130);
+	btn_level_left->img_btn->setScale(0.7);
+	helloscene->addChild(btn_level_left->img_btn);
 
-	//text
+	btn_level_right = new C3SButton("next.png", "next_t.png", "next_n.png", true); 
+	btn_level_right->img_btn->setPosition(770, 130);
+	btn_level_right->img_btn->setScale(0.7);
+	btn_level_right->img_btn->setRotation(180);
+	helloscene->addChild(btn_level_right->img_btn);
+
+	//Setting Botton
+	btn_setting = new C3SButton("setting.png", "setting_t.png", "setting.png", true);
+	btn_setting->img_btn->setPosition(1235, 680);
+	btn_setting->img_btn->setScale(0.8);
+	helloscene->addChild(btn_setting->img_btn);
+
+	//Text
 	difficulty_text = (cocos2d::ui::Text *)helloscene->getChildByName("difficulty");
 
-	//color設定
-	player_color[0] = Color3B(110, 210, 255);
-	player_color[1] = Color3B(255, 100, 100);
-	player_color[2] = Color3B(124, 255, 144);
-	player_color[3] = Color3B(255, 249, 137);
-	player_color[4] = Color3B(0, 0, 0);
+	//Character
+	player[0] = new C_character(RUN_1, Color3B(110, 210, 255));
+	player[1] = new C_character(RUN_2, Color3B(255, 100, 100));
+	player[2] = new C_character(RUN_3, Color3B(124, 255, 144));
+	player[3] = new C_character(RUN_4, Color3B(255, 249, 137));
+	player[4] = NULL;
 
-	//player animation
-	for (int i = 0; i < 4; i++) {
-		time_line[i] = (ActionTimeline *)CSLoader::createTimeline(run_character[i]);
-	}
-	time_line[4] = NULL;
+	player[3]->character->setPosition(330, 317);
+	helloscene->addChild(player[3]->set_character(false));
+	player[2]->character->setPosition(640, 360);
+	helloscene->addChild(player[2]->set_character(false));
+	player[1]->character->setPosition(950, 317);
+	helloscene->addChild(player[1]->set_character(false));
+	player[0]->character->setPosition(640, 340);
+	helloscene->addChild(player[0]->set_character(true));
 
-	//character
-	character[4] = NULL;
-	character[3] = player->set_character(run_character[3], player_color[3], false);
-	character[3]->setPosition(307, 317);
-	character[3]->runAction(time_line[3]);
-	time_line[3]->gotoFrameAndPlay(0, 0, false);
-	helloscene->addChild(character[3]);
-	character[2] = player->set_character(run_character[2], player_color[2], false);
-	character[2]->setPosition(620, 350);
-	character[2]->runAction(time_line[2]);
-	time_line[2]->gotoFrameAndPlay(0, 0, false);
-	character[2]->setScale(0.3);
-	helloscene->addChild(character[2]);
-	character[1] = player->set_character(run_character[1], player_color[1], false);
-	character[1]->setPosition(950, 317);
-	character[1]->runAction(time_line[1]);
-	time_line[1]->gotoFrameAndPlay(0, 0, false);
-	helloscene->addChild(character[1]);
-	character[0] = player->set_character(run_character[0], player_color[0], true);
-	character[0]->setPosition(615, 340);
-	character[0]->runAction(time_line[0]);
-	time_line[0]->gotoFrameAndPlay(0, 24, true);
-	helloscene->addChild(character[0]);
-
-	//play position
+	//Character Position
 	for (int i = 0; i < 4; i++)
-		pt[i] = character[i]->getPosition();
+		pt[i] = player[i]->character->getPosition();
 
 	_listener1 = EventListenerTouchOneByOne::create();	//創建一個一對一的事件聆聽器
 	_listener1->onTouchBegan = CC_CALLBACK_2(HelloWorld::onTouchBegan, this);		//加入觸碰開始事件
@@ -134,12 +127,12 @@ void HelloWorld::doStep(float dt)
 }
 void HelloWorld::bt_play_event(Ref *pSender, Widget::TouchEventType type) {
 	if (scene_btn) {
-		removeChild(helloscene);
-		CCScene * scene = CCScene::create();
+		removeAllChildren();
+		Scene * scene = Scene::create();
 		GameScene * layer = GameScene::create();
-		layer->get_character(get_number, player_color[0]);
+		layer->get_character(player[0], (level + 2)*0.5);
 		scene->addChild(layer);
-		CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.1f, scene));
+		Director::sharedDirector()->replaceScene(TransitionFade::create(0.5f, scene));
 		scene_btn = false;
 	}
 }
@@ -174,37 +167,27 @@ void HelloWorld::bt_character_event_left(Ref *pSender, Widget::TouchEventType ty
 			ch_action = false;
 			get_number++;
 			get_number = get_number % 4;
-			player_color[4] = player_color[0];
-			time_line[4] = time_line[0];
-			character[4] = character[0];
+			player[4] = player[0];
 			for (int i = 0; i < 5; i++) {
 				if (i < 4) {
-					player_color[i] = player_color[i + 1];
-					character[i] = character[i + 1];
-					time_line[i] = time_line[i + 1];
+					player[i] = player[i + 1];
 				}
 				else {
-					character[i] = NULL; player_color[i] = Color3B(0, 0, 0); time_line[i] = NULL;
+					player[i] = NULL;
 				}
 			}
 			for (int i = 3; i >= 0; i--) {
 				auto MoveAction = cocos2d::MoveTo::create(0.1f, pt[i]);
-				character[i]->runAction(MoveAction);
-			}
-			for (int i = 3; i >= 0; i--) {
+				player[i]->character->runAction(MoveAction);
 				if (i == 0) {
 					auto callback = CallFunc::create(this, callfunc_selector(HelloWorld::action_character));
-					character[i]->runAction(Sequence::create(player->ani_character(character[i], 2, player_color[i]), callback, NULL));
-					//character[i]->runAction(player->ani_character(character[i], 2, player_color[i]));
-					time_line[i]->gotoFrameAndPlay(0, 24, true);
+					player[i]->character->runAction(Sequence::create(player[i]->ani_character(i), callback, NULL));
 				}
 				else if (i == 2) {
-					character[i]->runAction(player->ani_character(character[i], 0, player_color[i]));
-					time_line[i]->gotoFrameAndPlay(0, 0, false);
+					player[i]->character->runAction(player[i]->ani_character(i));
 				}
 				else {
-					character[i]->runAction(player->ani_character(character[i], 1, player_color[i]));
-					time_line[i]->gotoFrameAndPlay(0, 0, false);
+					player[i]->character->runAction(player[i]->ani_character(1));
 				}
 			}
 			break;
@@ -227,39 +210,28 @@ void HelloWorld::bt_character_event_right(Ref *pSender, Widget::TouchEventType t
 			ch_action = false;
 			get_number--;
 			get_number = get_number % 4;
-			player_color[4] = player_color[3];
-			character[4] = character[3];
-			time_line[4] = time_line[3];
+			player[4] = player[3];
 			for (int i = 3; i >= 0; i--) {
 				if (i > 0) {
-					player_color[i] = player_color[i - 1];
-					character[i] = character[i - 1];
-					time_line[i] = time_line[i - 1];
+					player[i] = player[i - 1];
 				}
 				else {
-					player_color[i] = player_color[4];
-					character[i] = character[4];
-					time_line[i] = time_line[4];
+					player[i] = player[4];
 				}
 			}
-			character[4] = NULL; player_color[4] = Color3B(0, 0, 0); time_line[4] = NULL;
+			player[4] = NULL;
 			for (int i = 3; i >= 0; i--) {
 				auto MoveAction = cocos2d::MoveTo::create(0.1f, pt[i]);
-				character[i]->runAction(MoveAction);
-			}
-			for (int i = 3; i >= 0; i--) {
+				player[i]->character->runAction(MoveAction);
 				if (i == 0) {
 					auto callback = CallFunc::create(this, callfunc_selector(HelloWorld::action_character));
-					character[i]->runAction(Sequence::create(player->ani_character(character[i], 2, player_color[i]), callback, NULL));
-					time_line[i]->gotoFrameAndPlay(0, 24, true);
+					player[i]->character->runAction(Sequence::create(player[i]->ani_character(i), callback, NULL));
 				}
 				else if (i == 2) {
-					character[i]->runAction(player->ani_character(character[i], 0, player_color[i]));
-					time_line[i]->gotoFrameAndPlay(0, 0, false);
+					player[i]->character->runAction(player[i]->ani_character(i));
 				}
 				else {
-					character[i]->runAction(player->ani_character(character[i], 1, player_color[i]));
-					time_line[i]->gotoFrameAndPlay(0, 0, false);
+					player[i]->character->runAction(player[i]->ani_character(1));
 				}
 			}
 			break;
@@ -269,53 +241,21 @@ void HelloWorld::bt_character_event_right(Ref *pSender, Widget::TouchEventType t
 		}
 	}
 }
-void HelloWorld::bt_level_event_left(Ref *pSender, Widget::TouchEventType type)
-{
-	switch (type)
-	{
-	case Widget::TouchEventType::BEGAN:
-		number_level++;
-		if (number_level >= 2)number_level = 2;
-		break;
-	case Widget::TouchEventType::MOVED:
-		break;
-	case Widget::TouchEventType::ENDED:
-		for (int i = 0; i < 3; i++) {
-			if (i == number_level)
-				difficulty_text->setText(diff[i]);
-		}
-		break;
-	case Widget::TouchEventType::CANCELED:
-		break;
-	default:
-		break;
-	}
-}
-void HelloWorld::bt_level_event_right(Ref *pSender, Widget::TouchEventType type)
-{
-	switch (type)
-	{
-	case Widget::TouchEventType::BEGAN:
-		number_level--;
-		if (number_level <= 0)number_level = 0;
-		break;
-	case Widget::TouchEventType::MOVED:
-		break;
-	case Widget::TouchEventType::ENDED:
-		for (int i = 0; i < 3; i++) {
-			if (i == number_level)
-				difficulty_text->setText(diff[i]);
-		}
-		break;
-	case Widget::TouchEventType::CANCELED:
-		break;
-	default:
-		break;
-	}
-}
 bool  HelloWorld::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)//觸碰開始事件
 {
 	Point touchLoc = pTouch->getLocation();
+	if (btn_setting->get_rect().containsPoint(touchLoc)) {
+		btn_setting->touch();
+		setting_touch = true;
+	}
+	if (btn_level_left->get_rect().containsPoint(touchLoc)) {
+		btn_level_left->touch();
+		level_left_touch = true;
+	}
+	if (btn_level_right->get_rect().containsPoint(touchLoc)) {
+		btn_level_right->touch();
+		level_right_touch = true;
+	}
 	return true;
 }
 void  HelloWorld::onTouchMoved(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) //觸碰移動事件
@@ -325,6 +265,52 @@ void  HelloWorld::onTouchMoved(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) /
 void  HelloWorld::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) //觸碰結束事件 
 {
 	Point touchLoc = pTouch->getLocation();
+	if (setting_touch) {
+		setting_touch = false;
+		RenderTexture *renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height);
+		renderTexture->begin();
+		this->getParent()->visit();
+		renderTexture->end();
+		Scene * scene = Scene::create();
+		SettingScene * layer = SettingScene::create();
+		layer->get_bg(renderTexture);
+		scene->addChild(layer);
+		Director::sharedDirector()->pushScene(scene);
+	}
+	if (level_left_touch) {
+		level_left_touch = false;
+		level++;
+		if (level >= 2) {
+			level = 2;
+			/*btn_level_left->img_btn->setSpriteFrame(btn_level_left->Disable);
+			btn_level_left->Method = false;*/
+		}
+		/*else if (level > 0) {
+		btn_level_right->img_btn->setSpriteFrame(btn_level_left->Normal);
+		btn_level_right->Method = true;
+		}*/
+		for (int i = 0; i < 3; i++) {
+			if (i == level)
+				difficulty_text->setText(diff[i]);
+		}
+	}
+	if (level_right_touch) {
+		level_right_touch = false;
+		level--;
+		if (level <= 0) {
+			level = 0;
+			/*btn_level_right->img_btn->setSpriteFrame(btn_level_right->Disable);
+			btn_level_right->Method = false;*/
+		}
+		/*else if (level < 2) {
+		btn_level_left->img_btn->setSpriteFrame(btn_level_left->Normal);
+		btn_level_left->Method = true;
+		}*/
+		for (int i = 0; i < 3; i++) {
+			if (i == level)
+				difficulty_text->setText(diff[i]);
+		}
+	}
 }
 void HelloWorld::action_character()
 {

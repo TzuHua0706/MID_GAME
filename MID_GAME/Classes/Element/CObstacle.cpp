@@ -7,17 +7,41 @@ USING_NS_CC;
 using namespace cocostudio::timeline;
 using namespace ui;
 
-CObstacle::CObstacle() {}
+CObstacle::CObstacle() {
+	Obstacle = CSLoader::createNode("triangleNode.csb");
+	Obstacle->setPosition(150, 280);
+	MoveAction = cocos2d::MoveTo::create(2.0f, Point(1400, 280));
+	chAction = (ActionTimeline *)CSLoader::createTimeline("triangleNode.csb");
+}
 CObstacle::~CObstacle() {}
 
 cocos2d::Node * CObstacle::set_obstacle(float scale) {
-	auto Obstacle = CSLoader::createNode("triangleNode.csb");
-	Obstacle->setPosition(150, 280);
+	Scale = scale;
 	Obstacle->setScale(scale);
-	auto chAction = (ActionTimeline *)CSLoader::createTimeline("triangleNode.csb");
-	auto MoveAction = cocos2d::MoveTo::create(3.0f, Point(2000, 280));
 	Obstacle->runAction(chAction);
-	Obstacle->runAction(MoveAction);
 	chAction->gotoFrameAndPlay(0, 35, false);
+	auto delay = DelayTime::create(0.4f);
+	Obstacle->runAction(Sequence::create(delay, MoveAction, NULL));
 	return(Obstacle);
+}
+bool CObstacle::touch_obstacle(Rect touch, Point pt, ui::LoadingBar * blood) {
+	if (touch.containsPoint(pt)) {
+		if (Scale > 0.7) {
+			float t = blood->getPercent();
+			t = t - 30;
+			blood->setPercent(t);
+		}
+		else if(Scale > 0.5){
+			float t = blood->getPercent();
+			t = t - 10;
+			blood->setPercent(t);
+		}
+		else {
+			float t = blood->getPercent();
+			t = t - 5;
+			blood->setPercent(t);
+		}
+		return(true);
+	}
+	return(false);
 }
