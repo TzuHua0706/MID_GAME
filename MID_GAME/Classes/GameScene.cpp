@@ -1,6 +1,7 @@
 #include "GameScene.h"
 #include "HelloWorldScene.h"
 #include "StopScene.h"
+#include "GameEndScene.h"
 
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
@@ -15,7 +16,7 @@ GameScene::~GameScene(){}
 void GameScene::get_character(C_character * player, float get_level) {
 	C_player = new C_character(player->Player, player->Color);
 	C_player->character->setPosition(1050, 360);
-	gamescene->addChild(C_player->set_character(true));
+	gamescene->addChild(C_player->set_character(true),1);
 	level = get_level;
 }
 bool GameScene::init()
@@ -62,10 +63,10 @@ bool GameScene::init()
 	btn_stop = new C3SButton("stop.png", "stop_t.png", "stop.png", true);
 	btn_stop->img_btn->setPosition(1235, 680);
 	btn_stop->img_btn->setScale(0.8);
-	gamescene->addChild(btn_stop->img_btn, 2);
+	gamescene->addChild(btn_stop->img_btn);
 
 	//Jump
-	this->jump = Rect(origin.x + 50, origin.y + 50, visibleSize.width - 100, visibleSize.height - 100);
+	jump = Rect(origin.x - 100, origin.y - 100, visibleSize.width - 100, visibleSize.height - 100);
 
 	//Touch
 	_listener1 = EventListenerTouchOneByOne::create();
@@ -83,40 +84,68 @@ void GameScene::doStep(float dt)
 	fin_time += dt;
 	ob_time += dt;
 	face_time += dt;
-	if (ob_flag && fin_time > 5 && fin_time < 22) {
+	if (fin_time >= 1.5 && fin_time < 2)score_text->setText("2");
+	else if (fin_time >= 2.5 && fin_time < 3)score_text->setText("1");
+	else if (fin_time >= 3.5 && fin_time < 4)score_text->setText("GO");
+	else if (fin_time >= 4.5 && fin_time < 5)score_text->setText("Score : 0");
+	else if (fin_time >= 5 && fin_time < 35) {
 		//character½d³ò
 		Size s_ch = C_player->body->getContentSize();
 		Point p_ch = (C_player->body->getPosition()) + Point(1050, 360);
 		rect_ch = Rect(p_ch.x - s_ch.width / 2, p_ch.y - s_ch.height / 2, s_ch.width, s_ch.height);
-		if (ob_time >= level && fin_time < 20) {
+		if (ob_time >= level && fin_time < 33) {
 			float scale = ((2 * rand() + 1) % 6 + 4) *0.1;
 			ob_time = 0;
 			g_obstacle[ob] = new CObstacle;
 			gamescene->addChild(g_obstacle[ob]->set_obstacle(scale));
 			ob++;
-			ob = ob % 2;
-			touch_ob = true;
+			ob = ob % 3;
 		}
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < 3; i++) {
 			if (g_obstacle[i]) {
 				Point p_ob = g_obstacle[i]->Obstacle->getPosition();
-				if (p_ob.x > p_ch.x && p_ob.x < p_ch.x + s_ch.width / 2 && touch_ob) {
-					if (g_obstacle[i]->touch_obstacle(rect_ch, p_ob ,blood)) {
+				if (p_ob.x > p_ch.x - s_ch.width / 2 && p_ob.x < p_ch.x + s_ch.width / 2) {
+					if (g_obstacle[i]->touch_obstacle(rect_ch, p_ob, blood)) {
 						C_player->face_character(2);
 						face_time = 0;
-						touch_ob = false;
+						g_obstacle[i] = NULL;
+						stop_touch = false;
 					}
-					/*else {
-						score++;
+					else if (p_ob.x > p_ch.x + s_ch.width / 2 - 11) {
+						score += g_obstacle[i]->get_score;
 						sprintf(Score, "Score : %d", score);
 						score_text->setText(Score);
 						C_player->face_character(1);
 						face_time = 0;
-					}*/
+						stop_touch = false;
+					}
 				}
+				else if(p_ob.x > p_ch.x + s_ch.width / 2) g_obstacle[i] = NULL;
 			}
 		}
 		if (face_time >= 0.5)C_player->face_character(0);
+	}
+	else if (fin_time >= 35) {
+		RenderTexture *renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height);
+		renderTexture->begin();
+		this->getParent()->visit();
+		renderTexture->end();
+		Scene * scene = Scene::create();
+		GameEndScene * layer = GameEndScene::create();
+		layer->end("YOU WIN", C_player, level, renderTexture);
+		scene->addChild(layer);
+		Director::sharedDirector()->pushScene(scene);
+	}
+	if(blood->getPercent()==0) {
+		RenderTexture *renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height);
+		renderTexture->begin();
+		this->getParent()->visit();
+		renderTexture->end();
+		Scene * scene = Scene::create();
+		GameEndScene * layer = GameEndScene::create();
+		layer->end("GAMEOVER",C_player, level, renderTexture);
+		scene->addChild(layer);
+		Director::sharedDirector()->pushScene(scene);
 	}
 }
 void GameScene::bt_music_event(Ref *pSender, Widget::TouchEventType type) {
@@ -140,10 +169,6 @@ void GameScene::bt_music_event(Ref *pSender, Widget::TouchEventType type) {
 bool GameScene::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)//Ä²¸I¶}©l¨Æ¥ó
 {
 	Point touchLoc = pTouch->getLocation();
-	if (btn_stop->get_rect().containsPoint(touchLoc)) {
-		btn_stop->touch();
-		stop_touch = true;
-	}
 	if (jump.containsPoint(touchLoc)) {
 		if (jump_flag) {
 			jump_flag = false;
@@ -151,6 +176,10 @@ bool GameScene::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)//Ä²
 			auto callback = CallFunc::create(this, callfunc_selector(GameScene::jumpFinished));
 			body->runAction(Sequence::create(C_player->jump(), callback, NULL));
 		}
+	}
+	if (btn_stop->getrect().containsPoint(touchLoc)) {
+		btn_stop->touch();
+		stop_touch = true;
 	}
 	return true;
 }
@@ -162,6 +191,7 @@ void GameScene::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) //Ä
 {
 	Point touchLoc = pTouch->getLocation();
 	if (stop_touch) {
+		btn_stop->end();
 		stop_touch = false;
 		RenderTexture *renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height);
 		renderTexture->begin();

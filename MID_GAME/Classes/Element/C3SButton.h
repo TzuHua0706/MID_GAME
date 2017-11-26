@@ -15,11 +15,12 @@ public:
 	~C3SButton();
 
 	char * Normal;
-	char * Touched;
 	char * Disable;
+	char * Touched;
 	bool Method;
 	cocos2d::Rect rect_btn;
 	cocos2d::Sprite * img_btn;
-	cocos2d::Rect get_rect();
+	cocos2d::Rect getrect();
 	void touch();
+	void end();
 };

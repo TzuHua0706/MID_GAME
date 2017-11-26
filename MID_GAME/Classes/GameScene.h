@@ -13,7 +13,7 @@
 class GameScene : public cocos2d::Layer
 {
 private:
-	CObstacle * g_obstacle[2] = { NULL,NULL };
+	CObstacle * g_obstacle[3] = { NULL,NULL,NULL };
 	C_character * C_player;
 	C3SButton * btn_stop;
 public:
@@ -34,11 +34,9 @@ public:
 	int ob = 0;
 	int score = 0;
 	char Score[10];
-	bool jump_flag = true;
 	bool stop_touch = false;
-	bool ob_flag = true;
+	bool jump_flag = true;
 	bool music_flag = true;
-	bool touch_ob = true;
 	float face_time = 0;
 	float ob_time = 0;
 	float fin_time = 0;

@@ -55,10 +55,6 @@ bool HelloWorld::init()
 	btn_music = dynamic_cast<Button*>(helloscene->getChildByName("Button_music"));
 	btn_music->addTouchEventListener(CC_CALLBACK_2(HelloWorld::bt_music_event, this));
 
-	//Play Button
-	btn_play = dynamic_cast<Button*>(helloscene->getChildByName("Button_play"));
-	btn_play->addTouchEventListener(CC_CALLBACK_2(HelloWorld::bt_play_event, this));
-
 	//Animation
 	auto dancer = (ActionTimeline *)CSLoader::createTimeline("MainScene.csb");
 	helloscene->runAction(dancer);
@@ -71,12 +67,16 @@ bool HelloWorld::init()
 	btn_character_right = dynamic_cast<Button*>(helloscene->getChildByName("Button_right"));
 	btn_character_right->addTouchEventListener(CC_CALLBACK_2(HelloWorld::bt_character_event_right, this));
 
+	//Play Button
+	btn_play = new C3SButton("start.png", "start_t.png", "start.png", true);
+	btn_play->img_btn->setPosition(1100, 80);
+	helloscene->addChild(btn_play->img_btn);
+
 	//Level Botton
 	btn_level_left = new C3SButton("next.png","next_t.png","next_n.png",true);
 	btn_level_left->img_btn->setPosition(510, 130);
 	btn_level_left->img_btn->setScale(0.7);
 	helloscene->addChild(btn_level_left->img_btn);
-
 	btn_level_right = new C3SButton("next.png", "next_t.png", "next_n.png", true); 
 	btn_level_right->img_btn->setPosition(770, 130);
 	btn_level_right->img_btn->setScale(0.7);
@@ -124,17 +124,6 @@ bool HelloWorld::init()
 }
 void HelloWorld::doStep(float dt)
 {
-}
-void HelloWorld::bt_play_event(Ref *pSender, Widget::TouchEventType type) {
-	if (scene_btn) {
-		removeAllChildren();
-		Scene * scene = Scene::create();
-		GameScene * layer = GameScene::create();
-		layer->get_character(player[0], (level + 2)*0.5);
-		scene->addChild(layer);
-		Director::sharedDirector()->replaceScene(TransitionFade::create(0.5f, scene));
-		scene_btn = false;
-	}
 }
 void HelloWorld::bt_music_event(Ref *pSender, Widget::TouchEventType type) {
 	switch (type)
@@ -244,17 +233,21 @@ void HelloWorld::bt_character_event_right(Ref *pSender, Widget::TouchEventType t
 bool  HelloWorld::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)//觸碰開始事件
 {
 	Point touchLoc = pTouch->getLocation();
-	if (btn_setting->get_rect().containsPoint(touchLoc)) {
+	if (btn_setting->getrect().containsPoint(touchLoc)) {
 		btn_setting->touch();
 		setting_touch = true;
 	}
-	if (btn_level_left->get_rect().containsPoint(touchLoc)) {
+	if (btn_level_left->getrect().containsPoint(touchLoc)) {
 		btn_level_left->touch();
 		level_left_touch = true;
 	}
-	if (btn_level_right->get_rect().containsPoint(touchLoc)) {
+	if (btn_level_right->getrect().containsPoint(touchLoc)) {
 		btn_level_right->touch();
 		level_right_touch = true;
+	}
+	if (btn_play->getrect().containsPoint(touchLoc)) {
+		btn_play->touch();
+		play_touch = true;
 	}
 	return true;
 }
@@ -266,6 +259,7 @@ void  HelloWorld::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) /
 {
 	Point touchLoc = pTouch->getLocation();
 	if (setting_touch) {
+		btn_setting->end();
 		setting_touch = false;
 		RenderTexture *renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height);
 		renderTexture->begin();
@@ -278,38 +272,50 @@ void  HelloWorld::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) /
 		Director::sharedDirector()->pushScene(scene);
 	}
 	if (level_left_touch) {
+		btn_level_left->end();
 		level_left_touch = false;
 		level++;
 		if (level >= 2) {
 			level = 2;
-			/*btn_level_left->img_btn->setSpriteFrame(btn_level_left->Disable);
-			btn_level_left->Method = false;*/
+			btn_level_left->img_btn->setSpriteFrame(btn_level_left->Disable);
+			btn_level_left->Method = false;
 		}
-		/*else if (level > 0) {
+		else if (level > 0) {
 		btn_level_right->img_btn->setSpriteFrame(btn_level_left->Normal);
 		btn_level_right->Method = true;
-		}*/
+		}
 		for (int i = 0; i < 3; i++) {
 			if (i == level)
 				difficulty_text->setText(diff[i]);
 		}
 	}
 	if (level_right_touch) {
+		btn_level_right->end();
 		level_right_touch = false;
 		level--;
 		if (level <= 0) {
 			level = 0;
-			/*btn_level_right->img_btn->setSpriteFrame(btn_level_right->Disable);
-			btn_level_right->Method = false;*/
+			btn_level_right->img_btn->setSpriteFrame(btn_level_right->Disable);
+			btn_level_right->Method = false;
 		}
-		/*else if (level < 2) {
+		else if (level < 2) {
 		btn_level_left->img_btn->setSpriteFrame(btn_level_left->Normal);
 		btn_level_left->Method = true;
-		}*/
+		}
 		for (int i = 0; i < 3; i++) {
 			if (i == level)
 				difficulty_text->setText(diff[i]);
 		}
+	}
+	if (play_touch) {
+		btn_play->end();
+		play_touch = false;
+		removeAllChildren();
+		Scene * scene = Scene::create();
+		GameScene * layer = GameScene::create();
+		layer->get_character(player[0], (level + 2)*0.5);
+		scene->addChild(layer);
+		Director::sharedDirector()->replaceScene(TransitionFade::create(0.5f, scene));
 	}
 }
 void HelloWorld::action_character()

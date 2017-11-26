@@ -22,9 +22,8 @@ C3SButton::C3SButton(char * normal, char * touched, char * disable, bool method)
 }
 C3SButton::~C3SButton() {
 }
-cocos2d::Rect C3SButton::get_rect() {
-	if (Method) {
-		img_btn->setSpriteFrame(Normal); 
+cocos2d::Rect C3SButton::getrect() {
+	if (Method) { 
 		Size s_btn = img_btn->getContentSize();
 		Point p_btn = img_btn->getPosition();
 		rect_btn = Rect(p_btn.x - s_btn.width / 2, p_btn.y - s_btn.height / 2, s_btn.width, s_btn.height);
@@ -34,5 +33,10 @@ cocos2d::Rect C3SButton::get_rect() {
 void C3SButton::touch() {
 	if (Method) {
 		img_btn->setSpriteFrame(Touched);
+	}
+}
+void C3SButton::end() {
+	if (Method) {
+		img_btn->setSpriteFrame(Normal);
 	}
 }

@@ -41,7 +41,7 @@ bool SettingScene::init()
 
 	btn_x = new C3SButton("x.png", "x_t.png", "x.png", true);
 	btn_x->img_btn->setPosition(795, 620);
-	btn_x->img_btn->setScale(0.8);
+	btn_x->img_btn->setScale(0.8f);
 	this->addChild(btn_x->img_btn, 2);
 
 	//Touch
@@ -67,8 +67,9 @@ void SettingScene::sliderEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventT
 bool SettingScene::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)//觸碰開始事件
 {
 	Point touchLoc = pTouch->getLocation();
-	if (btn_x->get_rect().containsPoint(touchLoc)) {
+	if (btn_x->getrect().containsPoint(touchLoc)) {
 		btn_x->touch();
+		x_touch = true;
 	}
 	return true;
 }
@@ -79,7 +80,9 @@ void SettingScene::onTouchMoved(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) 
 void SettingScene::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) //觸碰結束事件 
 {
 	Point touchLoc = pTouch->getLocation();
-	if (btn_x->get_rect().containsPoint(touchLoc)) {
+	if (x_touch) {
+		btn_x->end();
+		x_touch = false;
 		HelloWorld * layer = HelloWorld::create();
 		layer->bkmusic->playBackgroundMusic();
 		Director::sharedDirector()->popScene();

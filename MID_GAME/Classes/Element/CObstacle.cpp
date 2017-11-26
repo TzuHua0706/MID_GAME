@@ -12,6 +12,7 @@ CObstacle::CObstacle() {
 	Obstacle->setPosition(150, 280);
 	MoveAction = cocos2d::MoveTo::create(2.0f, Point(1400, 280));
 	chAction = (ActionTimeline *)CSLoader::createTimeline("triangleNode.csb");
+	get_score = 0;
 }
 CObstacle::~CObstacle() {}
 
@@ -22,9 +23,18 @@ cocos2d::Node * CObstacle::set_obstacle(float scale) {
 	chAction->gotoFrameAndPlay(0, 35, false);
 	auto delay = DelayTime::create(0.4f);
 	Obstacle->runAction(Sequence::create(delay, MoveAction, NULL));
+	if (Scale > 0.7) {
+		get_score = 10;
+	}
+	else if (Scale > 0.5) {
+		get_score = 5;
+	}
+	else {
+		get_score = 3;
+	}
 	return(Obstacle);
 }
-bool CObstacle::touch_obstacle(Rect touch, Point pt, ui::LoadingBar * blood) {
+bool CObstacle::touch_obstacle(cocos2d::Rect touch, Point pt, ui::LoadingBar * blood) {
 	if (touch.containsPoint(pt)) {
 		if (Scale > 0.7) {
 			float t = blood->getPercent();

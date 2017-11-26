@@ -342,7 +342,7 @@
             <OutlineColor A="255" R="144" G="238" B="144" />
             <ShadowColor A="255" R="255" G="255" B="255" />
           </AbstractNodeData>
-          <AbstractNodeData Name="difficulty" ActionTag="2039636629" Tag="46" IconVisible="False" LeftMargin="570.0000" RightMargin="570.0000" TopMargin="567.4628" BottomMargin="101.5373" FontSize="48" LabelText="Normal" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+          <AbstractNodeData Name="difficulty" ActionTag="2039636629" Tag="46" IconVisible="False" LeftMargin="570.0000" RightMargin="570.0000" TopMargin="567.4627" BottomMargin="101.5373" FontSize="48" LabelText="Normal" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
             <Size X="140.0000" Y="51.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="640.0000" Y="127.0373" />
@@ -451,22 +451,6 @@
             <PrePosition X="0.0982" Y="0.9428" />
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="SR_bg.mp3" Plist="" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="Button_play" CanEdit="False" ActionTag="1280867899" Tag="28" IconVisible="False" LeftMargin="1092.1287" RightMargin="111.8713" TopMargin="605.4796" BottomMargin="40.5204" TouchEnable="True" FontSize="100" ButtonText="PLAY" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="46" Scale9Height="52" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="76.0000" Y="74.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="1130.1287" Y="77.5204" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.8829" Y="0.1077" />
-            <PreSize X="0.0594" Y="0.1028" />
-            <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
-            <TextColor A="255" R="255" G="255" B="255" />
-            <DisabledFileData Type="PlistSubImage" Path="next_n.png" Plist="new icon.plist" />
-            <PressedFileData Type="PlistSubImage" Path="next_n.png" Plist="new icon.plist" />
-            <NormalFileData Type="PlistSubImage" Path="next_n.png" Plist="new icon.plist" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

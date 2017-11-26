@@ -229,6 +229,20 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">start.png</key>
+            <key type="filename">start_t.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>75,45,150,90</rect>
+                <key>scale9Paddings</key>
+                <rect>75,45,150,90</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
         </map>
         <key>fileList</key>
         <array>
@@ -250,6 +264,8 @@
             <filename>home_t.png</filename>
             <filename>x.png</filename>
             <filename>x_t.png</filename>
+            <filename>start.png</filename>
+            <filename>start_t.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

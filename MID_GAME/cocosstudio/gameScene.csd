@@ -309,14 +309,14 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="SR_bg.mp3" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="score" CanEdit="False" ActionTag="-1221744370" Tag="127" IconVisible="False" LeftMargin="509.5000" RightMargin="509.5000" TopMargin="75.8700" BottomMargin="558.1300" FontSize="80" LabelText="Score : 0" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-            <Size X="261.0000" Y="86.0000" />
+          <AbstractNodeData Name="score" ActionTag="-1221744370" Tag="127" IconVisible="False" LeftMargin="619.5000" RightMargin="619.5000" TopMargin="75.8700" BottomMargin="558.1300" FontSize="80" LabelText="3" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+            <Size X="41.0000" Y="86.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="640.0000" Y="601.1300" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="26" G="35" B="74" />
             <PrePosition X="0.5000" Y="0.8349" />
-            <PreSize X="0.2039" Y="0.1194" />
+            <PreSize X="0.0320" Y="0.1194" />
             <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
             <OutlineColor A="255" R="144" G="238" B="144" />
             <ShadowColor A="255" R="255" G="255" B="255" />

@@ -85,7 +85,7 @@
             <key>next_n.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,74},{76,74}}</string>
+                <string>{{456,0},{76,74}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -98,7 +98,7 @@
             <key>next_t.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{76,74},{76,74}}</string>
+                <string>{{532,0},{76,74}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -111,7 +111,7 @@
             <key>play.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{152,74},{76,74}}</string>
+                <string>{{608,0},{76,74}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -124,7 +124,7 @@
             <key>play_t.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{228,74},{76,74}}</string>
+                <string>{{684,0},{76,74}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -137,7 +137,7 @@
             <key>replay.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{304,74},{76,74}}</string>
+                <string>{{760,0},{76,74}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -150,7 +150,7 @@
             <key>replay_t.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{380,74},{76,74}}</string>
+                <string>{{836,0},{76,74}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -163,7 +163,7 @@
             <key>setting.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{0,148},{76,74}}</string>
+                <string>{{912,0},{76,74}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -176,7 +176,7 @@
             <key>setting_t.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{76,148},{76,74}}</string>
+                <string>{{0,74},{76,74}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -186,10 +186,36 @@
                 <key>sourceSize</key>
                 <string>{76,74}</string>
             </dict>
+            <key>start.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{76,74},{300,180}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{300,180}}</string>
+                <key>sourceSize</key>
+                <string>{300,180}</string>
+            </dict>
+            <key>start_t.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{376,74},{300,180}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{300,180}}</string>
+                <key>sourceSize</key>
+                <string>{300,180}</string>
+            </dict>
             <key>stop.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{152,148},{76,74}}</string>
+                <string>{{676,74},{76,74}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -202,7 +228,7 @@
             <key>stop_t.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{228,148},{76,74}}</string>
+                <string>{{752,74},{76,74}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -215,7 +241,7 @@
             <key>x.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{304,148},{76,74}}</string>
+                <string>{{828,74},{76,74}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -228,7 +254,7 @@
             <key>x_t.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{380,148},{76,74}}</string>
+                <string>{{904,74},{76,74}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -250,9 +276,9 @@
             <key>realTextureFileName</key>
             <string>new icon.png</string>
             <key>size</key>
-            <string>{456,222}</string>
+            <string>{988,254}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:e7d72c61b3c430a34ed622693625b7b0:ace2be5361641a4b6574c1348ae210e3:94e2c6fbaa9e4871301ff0a514a2723e$</string>
+            <string>$TexturePacker:SmartUpdate:cadf4c7d6d027e37e23d5820918ecf4e:946b414a42146baf314e6456afa378a4:94e2c6fbaa9e4871301ff0a514a2723e$</string>
             <key>textureFileName</key>
             <string>new icon.png</string>
         </dict>

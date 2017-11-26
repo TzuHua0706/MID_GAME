@@ -16,8 +16,7 @@ public:
 	~CObstacle();
 
 
-	int score = 0;
-	char Score[10];
+	int get_score;
 	float Scale;
 
 	cocos2d::Node * Obstacle;
