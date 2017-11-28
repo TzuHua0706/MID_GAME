@@ -18,6 +18,11 @@ void GameScene::get_character(C_character * player, float get_level) {
 	C_player->character->setPosition(1050, 360);
 	gamescene->addChild(C_player->set_character(true),1);
 	level = get_level;
+	//¹CÀ¸¶i«×characer
+	C_small = new C_character(player->Player, player->Color);
+	C_small->character->setPosition(1180, 50);
+	gamescene->addChild(C_small->set_character(true), 1);
+	C_small->character->setScale(0.35f);
 }
 bool GameScene::init()
 {
@@ -33,17 +38,13 @@ bool GameScene::init()
 	addChild(gamescene);
 
 	//animation
-	auto dancer = (ActionTimeline *)CSLoader::createTimeline("gameScene.csb");
+	dancer = (ActionTimeline *)CSLoader::createTimeline("gameScene.csb");
 	gamescene->runAction(dancer);
 	dancer->gotoFrameAndPlay(0, 72, true);
 
 	//Music
 	bkmusic = (cocostudio::ComAudio *)gamescene->getChildByName("music_bg")->getComponent("music_bg");
 	bkmusic->playBackgroundMusic();
-
-	//Music button
-	btn_music = dynamic_cast<Button*>(gamescene->getChildByName("Button_music"));
-	btn_music->addTouchEventListener(CC_CALLBACK_2(GameScene::bt_music_event, this));
 
 	//LoadingBar Blood
 	blood = (cocos2d::ui::LoadingBar *)gamescene->getChildByName("LoadingBar_Blood");
@@ -59,11 +60,22 @@ bool GameScene::init()
 	bg_line->runAction(line_Action);
 	line_Action->gotoFrameAndPlay(0, 10, true);
 
+	//Music button
+	btn_music = new C3SButton("music.png", "music_t.png", "music_n.png", true); //music_n¤£¬O¸T¥Î¡A²Ä¤TºØ¹Ï
+	btn_music->img_btn->setPosition(45, 680);
+	btn_music->img_btn->setScale(0.8f);
+	gamescene->addChild(btn_music->img_btn);
+
 	//Stop button
 	btn_stop = new C3SButton("stop.png", "stop_t.png", "stop.png", true);
 	btn_stop->img_btn->setPosition(1235, 680);
 	btn_stop->img_btn->setScale(0.8f);
 	gamescene->addChild(btn_stop->img_btn);
+
+	//¹CÀ¸¶i«×
+	loading_game = (cocos2d::ui::LoadingBar *)gamescene->getChildByName("LoadingBar_game");
+	loading_game->setDirection(LoadingBar::Direction::LEFT);
+	loading_game->setPercent(100);
 
 	//Jump
 	jump = Rect(origin.x - 100, origin.y - 100, visibleSize.width - 100, visibleSize.height - 100);
@@ -88,13 +100,23 @@ void GameScene::doStep(float dt)
 	else if (fin_time >= 2.5 && fin_time < 3)score_text->setText("1");
 	else if (fin_time >= 3.5 && fin_time < 4)score_text->setText("GO");
 	else if (fin_time >= 4.5 && fin_time < 5)score_text->setText("Score : 0");
-	else if (fin_time >= 5 && fin_time < 35) {
+	else if (fin_time >= 5 && fin_time < 45) {
+		float t = loading_game->getPercent();
+		if (t >= dt * 2.5)  t = t - dt * 2.5;
+		else t = 0;
+		loading_game->setPercent(t); 
+		Point pt = C_small->character->getPosition();
+		if (pt.x >= 100)  pt.x = pt.x - dt * 27;
+		else pt.x = 100;
+		C_small->character->setPosition(pt.x, 50);
 		//character½d³ò
 		Size s_ch = C_player->body->getContentSize();
 		Point p_ch = (C_player->body->getPosition()) + Point(1050, 360);
 		rect_ch = Rect(p_ch.x - s_ch.width / 2, p_ch.y - s_ch.height / 2, s_ch.width, s_ch.height);
-		if (ob_time >= level && fin_time < 33) {
+		//float set_time = (rand() % 6)*0.05;
+		if (ob_time >= level && fin_time < 43) {
 			float scale = ((2 * rand() + 1) % 6 + 4) *0.1;
+			if (scale < 0.5)scale = 0.5;
 			ob_time = 0;
 			g_obstacle[ob] = new CObstacle;
 			gamescene->addChild(g_obstacle[ob]->set_obstacle(scale));
@@ -109,23 +131,30 @@ void GameScene::doStep(float dt)
 						C_player->face_character(2);
 						face_time = 0;
 						g_obstacle[i] = NULL;
-						stop_touch = false;
-					}
-					else if (p_ob.x > p_ch.x + s_ch.width / 2 - 11) {
-						score += g_obstacle[i]->get_score;
-						sprintf(Score, "Score : %d", score);
-						score_text->setText(Score);
-						C_player->face_character(1);
-						face_time = 0;
-						stop_touch = false;
 					}
 				}
-				else if(p_ob.x > p_ch.x + s_ch.width / 2) g_obstacle[i] = NULL;
-			}
+				else if (p_ob.x > p_ch.x + s_ch.width / 2 && g_obstacle[i]->score_flag) {
+					score += g_obstacle[i]->get_score;
+					sprintf(Score, "Score : %d", score);
+					score_text->setText(Score);
+					C_player->face_character(1);
+					face_time = 0;
+					g_obstacle[i] = NULL;
+				}
+		 	}
 		}
 		if (face_time >= 0.5)C_player->face_character(0);
 	}
-	else if (fin_time >= 35) {
+	if (score >= 100) {
+		if (!fire_time)
+			dancer->gotoFrameAndPlay(73, 132, true);
+		fire_time += dt;
+	}
+	if (fire_time >= 1.0f && fire) {
+		fire = false;
+		dancer->gotoFrameAndPlay(0, 72, true);
+	}
+	else if (fin_time >= 45) {
 		RenderTexture *renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height);
 		renderTexture->begin();
 		this->getParent()->visit();
@@ -148,24 +177,6 @@ void GameScene::doStep(float dt)
 		Director::sharedDirector()->pushScene(scene);
 	}
 }
-void GameScene::bt_music_event(Ref *pSender, Widget::TouchEventType type) {
-	switch (type)
-	{
-	case Widget::TouchEventType::BEGAN:
-		music_flag = !music_flag;
-		break;
-	case Widget::TouchEventType::MOVED:
-		break;
-	case Widget::TouchEventType::ENDED:
-		btn_music->setBright(music_flag);
-		if (!music_flag) { bkmusic->stopBackgroundMusic(); }
-		else bkmusic->playBackgroundMusic();
-		break;
-	case Widget::TouchEventType::CANCELED:
-		break;
-	default: break;
-	}
-}
 bool GameScene::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)//Ä²¸I¶}©l¨Æ¥ó
 {
 	Point touchLoc = pTouch->getLocation();
@@ -177,9 +188,11 @@ bool GameScene::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)//Ä²
 			body->runAction(Sequence::create(C_player->jump(), callback, NULL));
 		}
 	}
+	if (btn_music->getrect().containsPoint(touchLoc)) {
+		btn_music->touch();
+	}
 	if (btn_stop->getrect().containsPoint(touchLoc)) {
 		btn_stop->touch();
-		stop_touch = true;
 	}
 	return true;
 }
@@ -190,9 +203,20 @@ void GameScene::onTouchMoved(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) //Ä
 void GameScene::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) //Ä²¸Iµ²§ô¨Æ¥ó 
 {
 	Point touchLoc = pTouch->getLocation();
-	if (stop_touch) {
+	if (btn_music->touch_flag) {
+		btn_music->end();
+		music_open = !music_open;
+		if (!music_open) {
+			bkmusic->stopBackgroundMusic();
+			btn_music->img_btn->setSpriteFrame(btn_music->Disable);
+		}
+		else {
+			bkmusic->playBackgroundMusic();
+			btn_music->img_btn->setSpriteFrame(btn_music->Normal);
+		}
+	}
+	if (btn_stop->touch_flag) {
 		btn_stop->end();
-		stop_touch = false;
 		RenderTexture *renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height);
 		renderTexture->begin();
 		this->getParent()->visit();

@@ -11,10 +11,10 @@ class C_character
 {
 private:
 public:
-	C_character(char * player, cocos2d::Color3B color);
+	C_character(const char * player, cocos2d::Color3B color);
 	~C_character();
 
-	char * Player;
+	const char * Player;
 	cocos2d::Color3B Color;
 	cocos2d::Node * character;
 	cocos2d::Node * shadow;

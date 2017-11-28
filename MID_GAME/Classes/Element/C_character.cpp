@@ -9,7 +9,7 @@ using namespace cocostudio::timeline;
 using namespace ui;
 using namespace CocosDenshion;
 
-C_character::C_character(char * player, cocos2d::Color3B color) {
+C_character::C_character(const char * player, cocos2d::Color3B color) {
 	Player = player;
 	Color = color;
 	character = CSLoader::createNode(Player);
@@ -29,7 +29,7 @@ cocos2d::Node * C_character::set_character(bool select) {
 	happy->setVisible(false);
 	character->runAction(ac_character);
 	if (select) {
-		character->setScale(1);
+		character->setScale(1.0f);
 		body->setColor(Color);
 		shadow->setVisible(true);
 		normal->setVisible(true);
@@ -37,7 +37,7 @@ cocos2d::Node * C_character::set_character(bool select) {
 	}
 	//small
 	else {
-		character->setScale(0.7);
+		character->setScale(0.7f);
 		body->setColor(Color3B(115, 115, 115));
 		shadow->setVisible(false);
 		normal->setVisible(false);
@@ -65,13 +65,13 @@ cocos2d::Spawn * C_character::ani_character(int scale)//scale  2程 1い丁 0程
 		normal->setVisible(false);
 		ac_character->gotoFrameAndPlay(0, 0, false);
 		if (scale == 1) {
-			auto ScaleAction = cocos2d::ScaleTo::create(0.1f, 0.7);
+			auto ScaleAction = cocos2d::ScaleTo::create(0.1f, 0.7f);
 			auto FadeAction = cocos2d::FadeIn::create(0.1f);
 			auto chAction = Spawn::createWithTwoActions(ScaleAction, FadeAction);
 			return(chAction);
 		}
 		else {
-			auto ScaleAction = cocos2d::ScaleTo::create(0.1f, 0.3); 
+			auto ScaleAction = cocos2d::ScaleTo::create(0.1f, 0.3f); 
 			auto FadeAction = cocos2d::FadeOut::create(0.1f);
 			auto chAction = Spawn::createWithTwoActions(ScaleAction, FadeAction);
 			return(chAction);
@@ -81,24 +81,24 @@ cocos2d::Spawn * C_character::ani_character(int scale)//scale  2程 1い丁 0程
 cocos2d::EaseOut * C_character::jump() {
 	//Animation jump
 	unsigned int eid = SimpleAudioEngine::getInstance()->playEffect("thinking cloud.mp3");
-	auto body_jumpAction = cocos2d::JumpTo::create(0.8f, body->getPosition(), 280, 1);
+	auto body_jumpAction = cocos2d::JumpTo::create(0.7f, body->getPosition(), 280, 1);
 	auto body_jumpSineIn = EaseOut::create(body_jumpAction, 1); 
 	if (normal) {
-		auto face_jumpAction = cocos2d::JumpTo::create(0.8f, normal->getPosition(), 280, 1);
+		auto face_jumpAction = cocos2d::JumpTo::create(0.7f, normal->getPosition(), 280, 1);
 		auto face_jumpSineIn = EaseOut::create(face_jumpAction, 1);
 		normal->runAction(face_jumpSineIn);
 	}
 	if (sad) {
-		auto face_jumpAction = cocos2d::JumpTo::create(0.8f, sad->getPosition(), 280, 1);
+		auto face_jumpAction = cocos2d::JumpTo::create(0.7f, sad->getPosition(), 280, 1);
 		auto face_jumpSineIn = EaseOut::create(face_jumpAction, 1);
 		sad->runAction(face_jumpSineIn);
 	}
 	if (happy) {
-		auto face_jumpAction = cocos2d::JumpTo::create(0.8f, happy->getPosition(), 280, 1);
+		auto face_jumpAction = cocos2d::JumpTo::create(0.7f, happy->getPosition(), 280, 1);
 		auto face_jumpSineIn = EaseOut::create(face_jumpAction, 1);
 		happy->runAction(face_jumpSineIn);
 	}
-	ScaleBy * scaleby = ScaleBy::create(0.4f, 0.5f);
+	ScaleBy * scaleby = ScaleBy::create(0.35f, 0.5f);
 	auto scalebyBack = scaleby->reverse();
 	auto sequence = Sequence::create(scaleby, scalebyBack, NULL);
 	shadow->runAction(sequence);

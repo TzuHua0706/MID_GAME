@@ -7,7 +7,7 @@ USING_NS_CC;
 using namespace cocostudio::timeline;
 using namespace ui;
 
-C3SButton::C3SButton(char * normal, char * touched, char * disable, bool method) {
+C3SButton::C3SButton(const char * normal, const char * touched, const char * disable, bool method) {
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/new icon.plist");
 	Normal = normal;
 	Touched = touched;
@@ -19,6 +19,7 @@ C3SButton::C3SButton(char * normal, char * touched, char * disable, bool method)
 	else {
 		img_btn = Sprite::createWithSpriteFrameName(Disable);
 	}
+	touch_flag = false;
 }
 C3SButton::~C3SButton() {
 }
@@ -33,10 +34,12 @@ cocos2d::Rect C3SButton::getrect() {
 void C3SButton::touch() {
 	if (Method) {
 		img_btn->setSpriteFrame(Touched);
+		touch_flag = true;
 	}
 }
 void C3SButton::end() {
 	if (Method) {
 		img_btn->setSpriteFrame(Normal);
+		touch_flag = false;
 	}
 }

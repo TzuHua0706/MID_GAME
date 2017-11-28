@@ -25,20 +25,24 @@ bool SettingScene::init()
 
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/new icon.plist");
 
+	//­I´º
 	Sprite * bg = Sprite::create("res/setting_bg.png");
 	bg->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2));
 	bg->setOpacity(250);
 	this->addChild(bg,1);
 
+	//Slider BGmusic
 	auto slider_bkmusic = Slider::create();
 	slider_bkmusic->loadBarTexture("scene101/sliderTrack.png");
 	slider_bkmusic->loadProgressBarTexture("scene101/sliderProgress.png");
 	slider_bkmusic->loadSlidBallTextures("scene101/sliderballnormal.png", "scene101/sliderballpressed.png", "scene101/sliderballnormal.png");
 	slider_bkmusic->setPercent(100);
+	slider_bkmusic->setColor(Color3B(118,206,184));
 	slider_bkmusic->setPosition(Point(640,550));
 	this->addChild(slider_bkmusic, 2);
 	slider_bkmusic->addEventListener(CC_CALLBACK_2(SettingScene::sliderEvent, this));
-
+	
+	//X Button
 	btn_x = new C3SButton("x.png", "x_t.png", "x.png", true);
 	btn_x->img_btn->setPosition(795, 620);
 	btn_x->img_btn->setScale(0.8f);
@@ -69,7 +73,6 @@ bool SettingScene::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)/
 	Point touchLoc = pTouch->getLocation();
 	if (btn_x->getrect().containsPoint(touchLoc)) {
 		btn_x->touch();
-		x_touch = true;
 	}
 	return true;
 }
@@ -80,9 +83,8 @@ void SettingScene::onTouchMoved(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) 
 void SettingScene::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) //Ä²¸Iµ²§ô¨Æ¥ó 
 {
 	Point touchLoc = pTouch->getLocation();
-	if (x_touch) {
+	if (btn_x->touch_flag) {
 		btn_x->end();
-		x_touch = false;
 		HelloWorld * layer = HelloWorld::create();
 		layer->bkmusic->playBackgroundMusic();
 		Director::sharedDirector()->popScene();

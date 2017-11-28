@@ -15,8 +15,6 @@ private:
 	C3SButton * btn_home;
 	C_character * C_Player;
 	float Level = 0;
-	bool replay_touch = false;
-	bool home_touch = false;
 public:
 	GameEndScene();
 	~GameEndScene();

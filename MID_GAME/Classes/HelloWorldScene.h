@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __HELLOWORLD_SCENE_H__
+#define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
@@ -16,6 +17,9 @@ private:
 	C3SButton * btn_level_right;
 	C3SButton * btn_setting;
 	C3SButton * btn_play;
+	C3SButton * btn_character_left;
+	C3SButton * btn_character_right;
+	C3SButton * btn_music;
 	C_character * player[5];
 public:
 	HelloWorld();
@@ -26,27 +30,16 @@ public:
 	cocos2d::Size visibleSize;
 	cocos2d::Node * helloscene;
 	cocos2d::ui::Text * difficulty_text;
-	cocos2d::ui::Button * btn_character_left;
-	cocos2d::ui::Button * btn_character_right;
-	cocos2d::ui::Button * btn_music;
 	cocostudio::ComAudio * bkmusic;
 
-	bool level_left_touch = false;
-	bool level_right_touch = false;
-	bool setting_touch = false;
-	bool play_touch = false;
 	bool ch_action = true;
 	bool music_open = true;
 	char diff[3][10] = { "Difficult","Normal","Easy" }; //Level
 	int level = 1;
-	unsigned int get_number = 0;
 
 	void action_character();
 
 	//button
-	void bt_character_event_left(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
-	void bt_character_event_right(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
-	void bt_music_event(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	static cocos2d::Scene* createScene();
 	void doStep(float dt);
 
@@ -60,3 +53,5 @@ public:
 
 	CREATE_FUNC(HelloWorld);
 };
+
+#endif // __HELLOWORLD_SCENE_H__

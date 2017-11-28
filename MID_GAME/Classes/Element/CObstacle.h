@@ -15,7 +15,7 @@ public:
 	CObstacle();
 	~CObstacle();
 
-
+	bool score_flag;
 	int get_score;
 	float Scale;
 

@@ -12,7 +12,6 @@ class SettingScene : public cocos2d::Layer
 {
 private:
 	C3SButton * btn_x;
-	bool x_touch = false;
 public:
 	SettingScene();
 	~SettingScene();

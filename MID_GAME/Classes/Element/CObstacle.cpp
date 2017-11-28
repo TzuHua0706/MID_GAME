@@ -13,6 +13,7 @@ CObstacle::CObstacle() {
 	MoveAction = cocos2d::MoveTo::create(2.0f, Point(1400, 280));
 	chAction = (ActionTimeline *)CSLoader::createTimeline("triangleNode.csb");
 	get_score = 0;
+	score_flag = true;
 }
 CObstacle::~CObstacle() {}
 
@@ -51,6 +52,7 @@ bool CObstacle::touch_obstacle(cocos2d::Rect touch, Point pt, ui::LoadingBar * b
 			t = t - 5;
 			blood->setPercent(t);
 		}
+		score_flag = false;
 		return(true);
 	}
 	return(false);

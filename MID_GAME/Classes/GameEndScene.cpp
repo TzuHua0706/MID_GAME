@@ -64,11 +64,9 @@ bool GameEndScene::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)/
 	Point touchLoc = pTouch->getLocation();
 	if (btn_replay->getrect().containsPoint(touchLoc)) {
 		btn_replay->touch();
-		replay_touch = true;
 	}
 	if (btn_home->getrect().containsPoint(touchLoc)) {
 		btn_home->touch();
-		home_touch = true;
 	}
 	return true;
 }
@@ -79,9 +77,8 @@ void GameEndScene::onTouchMoved(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) 
 void GameEndScene::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) //Ä²¸Iµ²§ô¨Æ¥ó 
 {
 	Point touchLoc = pTouch->getLocation();
-	if (replay_touch) {
+	if (btn_replay->touch_flag) {
 		btn_replay->end();
-		replay_touch = false;
 		removeAllChildren();
 		Scene * scene = Scene::create();
 		GameScene * layer = GameScene::create();
@@ -89,9 +86,8 @@ void GameEndScene::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) 
 		scene->addChild(layer);
 		Director::sharedDirector()->replaceScene(scene);
 	}
-	if (home_touch) {
+	if (btn_home->touch_flag) {
 		btn_home->end();
-		home_touch = false;
 		removeAllChildren();
 		Scene * scene = Scene::create();
 		HelloWorld * layer = HelloWorld::create();

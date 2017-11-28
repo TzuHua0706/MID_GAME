@@ -285,51 +285,6 @@
             <FileData Type="PlistSubImage" Path="s101line01.png" Plist="scene101bg.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Button_left" ActionTag="-271054601" Tag="32" IconVisible="False" LeftMargin="162.0000" RightMargin="1042.0000" TopMargin="376.8987" BottomMargin="269.1013" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="46" Scale9Height="52" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="76.0000" Y="74.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="200.0000" Y="306.1013" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.1563" Y="0.4251" />
-            <PreSize X="0.0594" Y="0.1028" />
-            <TextColor A="255" R="65" G="65" B="70" />
-            <DisabledFileData Type="PlistSubImage" Path="next.png" Plist="new icon.plist" />
-            <PressedFileData Type="PlistSubImage" Path="next_t.png" Plist="new icon.plist" />
-            <NormalFileData Type="PlistSubImage" Path="next.png" Plist="new icon.plist" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="Button_right" ActionTag="1133628207" Tag="34" RotationSkewX="180.0000" RotationSkewY="180.0000" IconVisible="False" LeftMargin="1042.0000" RightMargin="162.0000" TopMargin="376.8990" BottomMargin="269.1010" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="46" Scale9Height="52" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="76.0000" Y="74.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="1080.0000" Y="306.1010" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.8438" Y="0.4251" />
-            <PreSize X="0.0594" Y="0.1028" />
-            <TextColor A="255" R="65" G="65" B="70" />
-            <DisabledFileData Type="PlistSubImage" Path="next.png" Plist="new icon.plist" />
-            <PressedFileData Type="PlistSubImage" Path="next_t.png" Plist="new icon.plist" />
-            <NormalFileData Type="PlistSubImage" Path="next.png" Plist="new icon.plist" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="Button_music" CanEdit="False" ActionTag="1027142193" Tag="35" IconVisible="False" LeftMargin="10.4100" RightMargin="1193.5900" TopMargin="3.1900" BottomMargin="642.8100" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="46" Scale9Height="52" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="76.0000" Y="74.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="48.4100" Y="679.8100" />
-            <Scale ScaleX="0.8000" ScaleY="0.8000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.0378" Y="0.9442" />
-            <PreSize X="0.0594" Y="0.1028" />
-            <TextColor A="255" R="65" G="65" B="70" />
-            <DisabledFileData Type="PlistSubImage" Path="music_n.png" Plist="new icon.plist" />
-            <PressedFileData Type="PlistSubImage" Path="music_t.png" Plist="new icon.plist" />
-            <NormalFileData Type="PlistSubImage" Path="music.png" Plist="new icon.plist" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
           <AbstractNodeData Name="MID GAME" CanEdit="False" ActionTag="-968208128" Tag="43" IconVisible="False" LeftMargin="463.9998" RightMargin="464.0002" TopMargin="75.8700" BottomMargin="558.1300" FontSize="80" LabelText="MID GAME" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
             <Size X="352.0000" Y="86.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />

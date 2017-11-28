@@ -15,7 +15,9 @@ class GameScene : public cocos2d::Layer
 private:
 	CObstacle * g_obstacle[3] = { NULL,NULL,NULL };
 	C_character * C_player;
+	C_character * C_small;
 	C3SButton * btn_stop;
+	C3SButton * btn_music;
 public:
 	GameScene();
 	~GameScene();
@@ -23,23 +25,25 @@ public:
 	cocos2d::Node * gamescene;
 	cocostudio::ComAudio * bkmusic;
 	cocos2d::ui::Text * score_text;
-	cocos2d::ui::Button * btn_music;
 	cocos2d::ui::LoadingBar * blood;
+	cocos2d::ui::LoadingBar * loading_game;
 	cocos2d::Rect jump;
 	cocos2d::Rect rect_ch;
 	cocos2d::Vec2 origin;
 	cocos2d::Size visibleSize;
+	cocostudio::timeline::ActionTimeline * dancer;
 
 	float level;
 	int ob = 0;
 	int score = 0;
 	char Score[10];
-	bool stop_touch = false;
 	bool jump_flag = true;
-	bool music_flag = true;
+	bool music_open = true;
 	float face_time = 0;
 	float ob_time = 0;
 	float fin_time = 0;
+	float fire_time = 0;
+	bool fire = true;
 
 	void doStep(float dt);
 
@@ -48,7 +52,6 @@ public:
 	cocos2d::RenderTexture *renderTexture;
 	void jumpFinished();
 	void get_character(C_character * player, float get_level);
-	void bt_music_event(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	//Ä²¸I
 	cocos2d::EventListenerTouchOneByOne *_listener1;
