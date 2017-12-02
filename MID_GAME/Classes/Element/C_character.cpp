@@ -166,19 +166,19 @@ void C_character::face_character(int face) {//face 0:normal 1:happy 2:sad
 		normal->setVisible(false);
 		sad->setVisible(false);
 		happy->setVisible(true);
-		int ColorR = Color.r + 30;
-		int ColorG = Color.g + 30;
-		int ColorB = Color.b + 30;
-		if (ColorR >= 255)ColorR = 255;
-		if (ColorG >= 255)ColorG = 255;
-		if (ColorB >= 255)ColorB = 255;
+		int ColorR = (Color.r + 255) / 2;
+		int ColorG = (Color.g + 255) / 2;
+		int ColorB = (Color.b + 255) / 2;
 		body->setColor(Color3B(ColorR, ColorG, ColorB));
 	}
 	else {
 		normal->setVisible(false);
 		sad->setVisible(true);
 		happy->setVisible(false);
-		body->setColor(Color3B(Color.r - 60, Color.g - 60, Color.b - 60));
-		sad_eye->setColor(Color3B(Color.r - 60, Color.g - 60, Color.b - 60));
+		int ColorR = Color.r / 2;
+		int ColorG = Color.g / 2;
+		int ColorB = Color.b / 2;
+		body->setColor(Color3B(ColorR, ColorG, ColorB));
+		sad_eye->setColor(Color3B(ColorR, ColorG, ColorB));
 	}
 }

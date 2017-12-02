@@ -55,7 +55,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="PlistSubImage" Path="trangle02.png" Plist="new character.plist" />
+            <FileData Type="PlistSubImage" Path="trangle01.png" Plist="new character.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="sad" ActionTag="1998629199" VisibleForFrame="False" Tag="94" IconVisible="True" LeftMargin="4.1935" RightMargin="-4.1935" TopMargin="0.4948" BottomMargin="-0.4948" ctype="SingleNodeObjectData">

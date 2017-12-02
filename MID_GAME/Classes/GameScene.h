@@ -42,8 +42,8 @@ public:
 	float face_time = 0;
 	float ob_time = 0;
 	float fin_time = 0;
-	float fire_time = 0;
 	bool fire = true;
+	float fire_time = 0;
 
 	void doStep(float dt);
 

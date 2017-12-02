@@ -96,7 +96,7 @@ bool GameScene::init()
 	loading_game->setPercent(100);
 
 	//Jump
-	jump = Rect(origin.x - 100, origin.y - 100, visibleSize.width - 100, visibleSize.height - 100);
+	jump = Rect(origin.x - 50, origin.y - 100, visibleSize.width - 100, visibleSize.height - 100);
 
 	//Touch
 	_listener1 = EventListenerTouchOneByOne::create();
@@ -163,15 +163,6 @@ void GameScene::doStep(float dt)
 		}
 		if (face_time >= 0.5)C_player->face_character(0);
 	}
-	if (score >= 100) {
-		if (!fire_time)
-			dancer->gotoFrameAndPlay(73, 132, true);
-		fire_time += dt;
-	}
-	if (fire_time >= 1.0f && fire) {
-		fire = false;
-		dancer->gotoFrameAndPlay(0, 72, true);
-	}
 	else if (fin_time >= 45) {
 		RenderTexture *renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height);
 		renderTexture->begin();
@@ -183,16 +174,28 @@ void GameScene::doStep(float dt)
 		scene->addChild(layer);
 		Director::sharedDirector()->pushScene(scene);
 	}
-	if(blood->getPercent()==0) {
+	if (blood->getPercent() == 0) {
 		RenderTexture *renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height);
 		renderTexture->begin();
 		this->getParent()->visit();
 		renderTexture->end();
 		Scene * scene = Scene::create();
 		GameEndScene * layer = GameEndScene::create();
-		layer->end("GAMEOVER",C_player, level, renderTexture, bkvolume);
+		layer->end("GAMEOVER", C_player, level, renderTexture, bkvolume);
 		scene->addChild(layer);
 		Director::sharedDirector()->pushScene(scene);
+	}
+	if (score >= 100) {
+		fire_time += dt;
+		if ((score % 100 >= 0 && score % 100 <= 9) && fire) {
+			fire = false;
+			dancer->gotoFrameAndPlay(73, 132, false);
+			fire_time = 0;
+		}
+		if (fire_time >= 1 && !fire) {
+			dancer->gotoFrameAndPlay(0, 72, true);
+		    fire = true;
+		}
 	}
 }
 bool GameScene::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)//觸碰開始事件

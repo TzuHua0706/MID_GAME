@@ -111,7 +111,7 @@ bool HelloWorld::init()
 	player[1]->set_character(false);
 	player[2] = new C_character(RUN_3, Color3B(124, 255, 144));
 	player[2]->set_character(false);
-	player[3] = new C_character(RUN_4, Color3B(255, 249, 137));
+	player[3] = new C_character(RUN_4, Color3B(255, 251, 114));
 	player[3]->set_character(false);
 	player[4] = new C_character(RUN_1, Color3B(110, 210, 255));
 
