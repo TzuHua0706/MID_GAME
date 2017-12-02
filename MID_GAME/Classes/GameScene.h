@@ -34,11 +34,11 @@ public:
 	cocostudio::timeline::ActionTimeline * dancer;
 
 	float level;
+	float bkvolume;
 	int ob = 0;
 	int score = 0;
 	char Score[10];
-	bool jump_flag = true;
-	bool music_open = true;
+	bool music_flag = true;
 	float face_time = 0;
 	float ob_time = 0;
 	float fin_time = 0;
@@ -50,8 +50,7 @@ public:
 	virtual bool init();
 
 	cocos2d::RenderTexture *renderTexture;
-	void jumpFinished();
-	void get_character(C_character * player, float get_level);
+	void get_character(C_character * player, float get_level, float volume);
 
 	//Ä²¸I
 	cocos2d::EventListenerTouchOneByOne *_listener1;

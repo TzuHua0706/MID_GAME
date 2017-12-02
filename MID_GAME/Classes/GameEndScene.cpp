@@ -13,6 +13,9 @@ using namespace ui;
 GameEndScene::GameEndScene() {}
 GameEndScene::~GameEndScene() {
 	removeAllChildren();
+	delete btn_replay;
+	delete btn_home;
+	delete C_Player;
 }
 bool GameEndScene::init()
 {
@@ -44,20 +47,32 @@ bool GameEndScene::init()
 
 	return true;
 }
-void GameEndScene::end(char * end, C_character * player, float get_level, RenderTexture* sc) {
+void GameEndScene::end(char * end, C_character * player, float get_level, RenderTexture* sc, float volume) {
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Sprite * bg = Sprite::createWithTexture(sc->getSprite()->getTexture());
 	bg->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2));
 	bg->setFlipY(true);
-	bg->setColor(Color3B(50, 50, 50));
 	this->addChild(bg);
 	C_Player = new C_character(player->Player, player->Color);
 	Level = get_level;
+	bkvolume = volume;
 	auto text = Label::createWithTTF(end, "fonts/Marker Felt.ttf", 120);
 	text->setAlignment(cocos2d::TextHAlignment::CENTER);
-	text->setColor(Color3B(151, 0, 0));
 	text->setPosition(640, 400);
 	this->addChild(text, 2);
+	if (end == "YOU WIN") {
+		Sprite * bg_2 = Sprite::create("res/end_bg.png");
+		bg_2->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2));
+		bg_2->setOpacity(80);
+		this->addChild(bg_2, 1);
+		text->setColor(Color3B(26,35,74));
+		btn_replay->img_btn->setColor(Color3B(95, 95, 95));
+		btn_home->img_btn->setColor(Color3B(95, 95, 95));
+	}
+	else {
+		bg->setColor(Color3B(50, 50, 50)); 
+		text->setColor(Color3B(151, 0, 0));
+	}
 }
 bool GameEndScene::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)//觸碰開始事件
 {
@@ -82,7 +97,7 @@ void GameEndScene::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) 
 		removeAllChildren();
 		Scene * scene = Scene::create();
 		GameScene * layer = GameScene::create();
-		layer->get_character(C_Player, Level);
+		layer->get_character(C_Player, Level, bkvolume);
 		scene->addChild(layer);
 		Director::sharedDirector()->replaceScene(scene);
 	}

@@ -12,6 +12,7 @@ using namespace cocostudio::timeline;
 SettingScene::SettingScene() {}
 SettingScene::~SettingScene() {
 	removeAllChildren();
+	delete btn_x;
 }
 bool SettingScene::init()
 {
@@ -31,14 +32,21 @@ bool SettingScene::init()
 	bg->setOpacity(250);
 	this->addChild(bg,1);
 
+	auto text = Label::createWithTTF("Background Music", "fonts/Marker Felt.ttf", 24);
+	text->setAlignment(cocos2d::TextHAlignment::CENTER);
+	text->setColor(Color3B(204, 108, 106));
+	text->setPosition(580, 560);
+	this->addChild(text, 2);
+
 	//Slider BGmusic
-	auto slider_bkmusic = Slider::create();
+	slider_bkmusic = Slider::create();
 	slider_bkmusic->loadBarTexture("scene101/sliderTrack.png");
 	slider_bkmusic->loadProgressBarTexture("scene101/sliderProgress.png");
 	slider_bkmusic->loadSlidBallTextures("scene101/sliderballnormal.png", "scene101/sliderballpressed.png", "scene101/sliderballnormal.png");
 	slider_bkmusic->setPercent(100);
 	slider_bkmusic->setColor(Color3B(118,206,184));
-	slider_bkmusic->setPosition(Point(640,550));
+	slider_bkmusic->setPosition(Point(640, 530));
+	slider_bkmusic->setScale(1.1);
 	this->addChild(slider_bkmusic, 2);
 	slider_bkmusic->addEventListener(CC_CALLBACK_2(SettingScene::sliderEvent, this));
 	
@@ -66,7 +74,11 @@ void SettingScene::get_bg(RenderTexture* sc) {
 	bg->setColor(Color3B(115, 115, 115));
 	this->addChild(bg);
 }
+void SettingScene::get_slider(float percent) {
+	slider_bkmusic->setPercent(percent * 100);
+}
 void SettingScene::sliderEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type) {
+	m_percent = slider_bkmusic->getPercent();
 }
 bool SettingScene::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)//觸碰開始事件
 {
@@ -86,7 +98,7 @@ void SettingScene::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) 
 	if (btn_x->touch_flag) {
 		btn_x->end();
 		HelloWorld * layer = HelloWorld::create();
-		layer->bkmusic->playBackgroundMusic();
+		layer->bkmusic->setBackgroundMusicVolume(m_percent*0.01);
 		Director::sharedDirector()->popScene();
 	}
 }

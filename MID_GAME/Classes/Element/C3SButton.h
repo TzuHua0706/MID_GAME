@@ -10,6 +10,7 @@
 class C3SButton
 {
 private:
+	float scale;
 public:
 	C3SButton(const char * normal, const char * touched, const char * disable, bool method);
 	~C3SButton();

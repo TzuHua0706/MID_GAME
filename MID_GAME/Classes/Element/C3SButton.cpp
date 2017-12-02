@@ -34,12 +34,15 @@ cocos2d::Rect C3SButton::getrect() {
 void C3SButton::touch() {
 	if (Method) {
 		img_btn->setSpriteFrame(Touched);
+		scale = img_btn->getScale();
+		img_btn->setScale(scale + 0.1f);
 		touch_flag = true;
 	}
 }
 void C3SButton::end() {
 	if (Method) {
 		img_btn->setSpriteFrame(Normal);
+		img_btn->setScale(scale);
 		touch_flag = false;
 	}
 }

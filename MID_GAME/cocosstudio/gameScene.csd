@@ -1692,7 +1692,7 @@
             <FileData Type="PlistSubImage" Path="sliderTrack.png" Plist="scene101.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="LoadingBar_game" CanEdit="False" ActionTag="-1317026392" Tag="38" IconVisible="False" LeftMargin="514.9991" RightMargin="515.0009" TopMargin="665.5271" BottomMargin="41.4729" ProgressInfo="100" ctype="LoadingBarObjectData">
+          <AbstractNodeData Name="LoadingBar_game" ActionTag="-1317026392" Tag="38" IconVisible="False" LeftMargin="514.9991" RightMargin="515.0009" TopMargin="665.5271" BottomMargin="41.4729" ProgressInfo="100" ctype="LoadingBarObjectData">
             <Size X="250.0000" Y="13.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="639.9991" Y="47.9729" />
@@ -1702,15 +1702,15 @@
             <PreSize X="0.1953" Y="0.0181" />
             <ImageFileData Type="PlistSubImage" Path="sliderProgress.png" Plist="scene101.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="fire_1" CanEdit="False" ActionTag="-363674068" Tag="31" IconVisible="False" LeftMargin="-35.6186" RightMargin="1135.6187" TopMargin="91.5144" BottomMargin="448.4856" ctype="SpriteObjectData">
-            <Size X="180.0000" Y="180.0000" />
+          <AbstractNodeData Name="fire_1" CanEdit="False" ActionTag="-363674068" Tag="31" IconVisible="False" LeftMargin="-65.6186" RightMargin="1105.6187" TopMargin="71.5144" BottomMargin="428.4856" ctype="SpriteObjectData">
+            <Size X="240.0000" Y="220.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="54.3814" Y="538.4856" />
             <Scale ScaleX="0.6954" ScaleY="0.6954" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.0425" Y="0.7479" />
             <PreSize X="0.1875" Y="0.3056" />
-            <FileData Type="PlistSubImage" Path="flame2_02.png" Plist="scene101.plist" />
+            <FileData Type="PlistSubImage" Path="flame1_00.png" Plist="scene101.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="fire_2" ActionTag="1184154609" Tag="35" IconVisible="False" LeftMargin="69.3300" RightMargin="1030.6700" TopMargin="91.5100" BottomMargin="448.4900" ctype="SpriteObjectData">
@@ -1721,7 +1721,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.1245" Y="0.7479" />
             <PreSize X="0.1406" Y="0.2500" />
-            <FileData Type="PlistSubImage" Path="flame2_02.png" Plist="scene101.plist" />
+            <FileData Type="PlistSubImage" Path="flame2_00.png" Plist="scene101.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="fire_3" ActionTag="1411379977" Tag="37" IconVisible="False" LeftMargin="174.2900" RightMargin="925.7100" TopMargin="91.5100" BottomMargin="448.4900" ctype="SpriteObjectData">
@@ -1732,7 +1732,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.2065" Y="0.7479" />
             <PreSize X="0.1406" Y="0.2500" />
-            <FileData Type="PlistSubImage" Path="flame2_02.png" Plist="scene101.plist" />
+            <FileData Type="PlistSubImage" Path="flame2_00.png" Plist="scene101.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="fire_4" ActionTag="523698962" Tag="38" IconVisible="False" LeftMargin="279.2400" RightMargin="820.7600" TopMargin="91.5100" BottomMargin="448.4900" ctype="SpriteObjectData">
@@ -1743,7 +1743,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.2885" Y="0.7479" />
             <PreSize X="0.1406" Y="0.2500" />
-            <FileData Type="PlistSubImage" Path="flame2_02.png" Plist="scene101.plist" />
+            <FileData Type="PlistSubImage" Path="flame2_00.png" Plist="scene101.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="fire_5" ActionTag="474775294" Tag="39" RotationSkewY="180.0000" IconVisible="False" LeftMargin="821.9200" RightMargin="278.0800" TopMargin="91.5100" BottomMargin="448.4900" ctype="SpriteObjectData">
@@ -1754,7 +1754,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.7124" Y="0.7479" />
             <PreSize X="0.1406" Y="0.2500" />
-            <FileData Type="PlistSubImage" Path="flame2_02.png" Plist="scene101.plist" />
+            <FileData Type="PlistSubImage" Path="flame2_00.png" Plist="scene101.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="fire_6" ActionTag="363979042" Tag="40" RotationSkewY="180.0000" IconVisible="False" LeftMargin="926.8700" RightMargin="173.1300" TopMargin="91.5100" BottomMargin="448.4900" ctype="SpriteObjectData">
@@ -1765,7 +1765,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.7944" Y="0.7479" />
             <PreSize X="0.1406" Y="0.2500" />
-            <FileData Type="PlistSubImage" Path="flame2_02.png" Plist="scene101.plist" />
+            <FileData Type="PlistSubImage" Path="flame2_00.png" Plist="scene101.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="fire_7" ActionTag="13067921" Tag="41" RotationSkewY="180.0000" IconVisible="False" LeftMargin="1031.8199" RightMargin="68.1801" TopMargin="91.5100" BottomMargin="448.4900" ctype="SpriteObjectData">
@@ -1776,7 +1776,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.8764" Y="0.7479" />
             <PreSize X="0.1406" Y="0.2500" />
-            <FileData Type="PlistSubImage" Path="flame2_02.png" Plist="scene101.plist" />
+            <FileData Type="PlistSubImage" Path="flame2_00.png" Plist="scene101.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="fire_8" ActionTag="-1715167878" Tag="42" RotationSkewY="180.0000" IconVisible="False" LeftMargin="1136.7800" RightMargin="-36.7800" TopMargin="91.5100" BottomMargin="448.4900" ctype="SpriteObjectData">
@@ -1787,7 +1787,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.9584" Y="0.7479" />
             <PreSize X="0.1406" Y="0.2500" />
-            <FileData Type="PlistSubImage" Path="flame2_02.png" Plist="scene101.plist" />
+            <FileData Type="PlistSubImage" Path="flame2_00.png" Plist="scene101.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="dance_8" CanEdit="False" ActionTag="-1696783655" Tag="46" RotationSkewY="180.0000" IconVisible="False" LeftMargin="1163.2800" RightMargin="-14.2800" TopMargin="45.1123" BottomMargin="471.8877" ctype="SpriteObjectData">
@@ -1798,7 +1798,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.9600" Y="0.7964" />
             <PreSize X="0.1023" Y="0.2819" />
-            <FileData Type="PlistSubImage" Path="bean2_01.png" Plist="scene101.plist" />
+            <FileData Type="PlistSubImage" Path="bean1_01.png" Plist="scene101.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="dance_7" CanEdit="False" ActionTag="-1388274524" Tag="47" RotationSkewY="180.0000" IconVisible="False" LeftMargin="1058.3228" RightMargin="90.6772" TopMargin="45.1123" BottomMargin="471.8877" ctype="SpriteObjectData">
@@ -1809,7 +1809,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.8780" Y="0.7964" />
             <PreSize X="0.1023" Y="0.2819" />
-            <FileData Type="PlistSubImage" Path="bean2_01.png" Plist="scene101.plist" />
+            <FileData Type="PlistSubImage" Path="bean1_01.png" Plist="scene101.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="dance_6" CanEdit="False" ActionTag="1098803969" Tag="48" RotationSkewY="180.0000" IconVisible="False" LeftMargin="953.3704" RightMargin="195.6296" TopMargin="45.1123" BottomMargin="471.8877" ctype="SpriteObjectData">
@@ -1820,7 +1820,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.7960" Y="0.7964" />
             <PreSize X="0.1023" Y="0.2819" />
-            <FileData Type="PlistSubImage" Path="bean2_01.png" Plist="scene101.plist" />
+            <FileData Type="PlistSubImage" Path="bean1_01.png" Plist="scene101.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="dance_5" CanEdit="False" ActionTag="-1993282937" Tag="49" RotationSkewY="180.0000" IconVisible="False" LeftMargin="848.4200" RightMargin="300.5800" TopMargin="45.1123" BottomMargin="471.8877" ctype="SpriteObjectData">
@@ -1831,7 +1831,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.7140" Y="0.7964" />
             <PreSize X="0.1023" Y="0.2819" />
-            <FileData Type="PlistSubImage" Path="bean2_01.png" Plist="scene101.plist" />
+            <FileData Type="PlistSubImage" Path="bean1_01.png" Plist="scene101.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="dance_4" CanEdit="False" ActionTag="1367251610" Tag="50" IconVisible="False" LeftMargin="301.7400" RightMargin="847.2600" TopMargin="45.1123" BottomMargin="471.8877" ctype="SpriteObjectData">
@@ -1842,7 +1842,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.2869" Y="0.7964" />
             <PreSize X="0.1023" Y="0.2819" />
-            <FileData Type="PlistSubImage" Path="bean2_01.png" Plist="scene101.plist" />
+            <FileData Type="PlistSubImage" Path="bean1_01.png" Plist="scene101.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="dance_3" CanEdit="False" ActionTag="-2116161100" Tag="51" IconVisible="False" LeftMargin="196.7874" RightMargin="952.2126" TopMargin="45.1123" BottomMargin="471.8877" ctype="SpriteObjectData">
@@ -1853,7 +1853,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.2049" Y="0.7964" />
             <PreSize X="0.1023" Y="0.2819" />
-            <FileData Type="PlistSubImage" Path="bean2_01.png" Plist="scene101.plist" />
+            <FileData Type="PlistSubImage" Path="bean1_01.png" Plist="scene101.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="dance_2" CanEdit="False" ActionTag="-950758348" Tag="52" IconVisible="False" LeftMargin="91.8300" RightMargin="1057.1700" TopMargin="45.1123" BottomMargin="471.8877" ctype="SpriteObjectData">
@@ -1864,7 +1864,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.1229" Y="0.7964" />
             <PreSize X="0.1023" Y="0.2819" />
-            <FileData Type="PlistSubImage" Path="bean2_01.png" Plist="scene101.plist" />
+            <FileData Type="PlistSubImage" Path="bean1_01.png" Plist="scene101.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="dance_1" CanEdit="False" ActionTag="-294002070" Tag="53" IconVisible="False" LeftMargin="-13.1200" RightMargin="1162.1200" TopMargin="45.1123" BottomMargin="471.8877" ctype="SpriteObjectData">
@@ -1875,7 +1875,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.0409" Y="0.7964" />
             <PreSize X="0.1023" Y="0.2819" />
-            <FileData Type="PlistSubImage" Path="bean2_01.png" Plist="scene101.plist" />
+            <FileData Type="PlistSubImage" Path="bean1_01.png" Plist="scene101.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
         </Children>

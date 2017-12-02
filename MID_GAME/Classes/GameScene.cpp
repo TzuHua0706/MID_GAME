@@ -2,6 +2,7 @@
 #include "HelloWorldScene.h"
 #include "StopScene.h"
 #include "GameEndScene.h"
+#include "SimpleAudioEngine.h"
 
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
@@ -12,17 +13,34 @@ using namespace cocostudio::timeline;
 using namespace ui;
 
 GameScene::GameScene(){}
-GameScene::~GameScene(){}
-void GameScene::get_character(C_character * player, float get_level) {
+GameScene::~GameScene(){
+	if (!(g_obstacle[0] == NULL))
+		delete g_obstacle[0];
+	if (!(g_obstacle[1] == NULL))
+		delete g_obstacle[1];
+	if (!(g_obstacle[2] == NULL))
+		delete g_obstacle[2];
+	//delete C_player;
+	//delete C_small;
+	delete btn_stop;
+	delete btn_music;
+}
+void GameScene::get_character(C_character * player, float get_level, float volume) {
 	C_player = new C_character(player->Player, player->Color);
 	C_player->character->setPosition(1050, 360);
-	gamescene->addChild(C_player->set_character(true),1);
+	C_player->set_character(true);
+	gamescene->addChild(C_player->character,1);
 	level = get_level;
 	//¹CÀ¸¶i«×characer
 	C_small = new C_character(player->Player, player->Color);
 	C_small->character->setPosition(1180, 50);
-	gamescene->addChild(C_small->set_character(true), 1);
+	C_small->set_character(true);
+	gamescene->addChild(C_small->character, 1);
 	C_small->character->setScale(0.35f);
+	bkvolume = volume;
+	bkmusic->setBackgroundMusicVolume(bkvolume);
+	if (!bkvolume) { btn_music->img_btn->setSpriteFrame(btn_music->Disable); music_flag = false; }
+	else { btn_music->img_btn->setSpriteFrame(btn_music->Normal); music_flag = true; }
 }
 bool GameScene::init()
 {
@@ -161,7 +179,7 @@ void GameScene::doStep(float dt)
 		renderTexture->end();
 		Scene * scene = Scene::create();
 		GameEndScene * layer = GameEndScene::create();
-		layer->end("YOU WIN", C_player, level, renderTexture);
+		layer->end("YOU WIN", C_player, level, renderTexture, bkvolume);
 		scene->addChild(layer);
 		Director::sharedDirector()->pushScene(scene);
 	}
@@ -172,7 +190,7 @@ void GameScene::doStep(float dt)
 		renderTexture->end();
 		Scene * scene = Scene::create();
 		GameEndScene * layer = GameEndScene::create();
-		layer->end("GAMEOVER",C_player, level, renderTexture);
+		layer->end("GAMEOVER",C_player, level, renderTexture, bkvolume);
 		scene->addChild(layer);
 		Director::sharedDirector()->pushScene(scene);
 	}
@@ -181,12 +199,8 @@ bool GameScene::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)//Ä²
 {
 	Point touchLoc = pTouch->getLocation();
 	if (jump.containsPoint(touchLoc)) {
-		if (jump_flag) {
-			jump_flag = false;
-			auto body = C_player->character->getChildByName("player");
-			auto callback = CallFunc::create(this, callfunc_selector(GameScene::jumpFinished));
-			body->runAction(Sequence::create(C_player->jump(), callback, NULL));
-		}
+		auto m = bkmusic->getBackgroundMusicVolume();
+		C_player->jump(m);
 	}
 	if (btn_music->getrect().containsPoint(touchLoc)) {
 		btn_music->touch();
@@ -205,13 +219,13 @@ void GameScene::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) //Ä
 	Point touchLoc = pTouch->getLocation();
 	if (btn_music->touch_flag) {
 		btn_music->end();
-		music_open = !music_open;
-		if (!music_open) {
-			bkmusic->stopBackgroundMusic();
+		music_flag = !music_flag;
+		if (!music_flag) {
+			bkmusic->setBackgroundMusicVolume(0);
 			btn_music->img_btn->setSpriteFrame(btn_music->Disable);
 		}
 		else {
-			bkmusic->playBackgroundMusic();
+			bkmusic->setBackgroundMusicVolume(bkvolume);
 			btn_music->img_btn->setSpriteFrame(btn_music->Normal);
 		}
 	}
@@ -223,12 +237,8 @@ void GameScene::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) //Ä
 		renderTexture->end();
 		Scene * scene = Scene::create();
 		StopScene * layer = StopScene::create();
-		layer->get_character(C_player, level, renderTexture);
+		layer->get_character(C_player, level, renderTexture, bkvolume);
 		scene->addChild(layer);
 		Director::sharedDirector()->pushScene(scene);
 	}
-}
-void GameScene::jumpFinished()
-{
-	jump_flag = true;
 }

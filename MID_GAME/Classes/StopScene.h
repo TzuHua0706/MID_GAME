@@ -17,13 +17,14 @@ private:
 	C3SButton * btn_home;
 	C_character * C_Player;
 	float Level = 0;
+	float bkvolume;
 public:
 	StopScene();
 	~StopScene();
 
 	virtual bool init();
 
-	void get_character(C_character * player, float get_level, cocos2d::RenderTexture* sc);
+	void get_character(C_character * player, float get_level, cocos2d::RenderTexture* sc, float volume);
 
 	//Ä²¸I
 	cocos2d::EventListenerTouchOneByOne *_listener1;

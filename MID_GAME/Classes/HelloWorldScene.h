@@ -19,12 +19,12 @@ private:
 	C3SButton * btn_play;
 	C3SButton * btn_character_left;
 	C3SButton * btn_character_right;
-	C3SButton * btn_music;
 	C_character * player[5];
 public:
 	HelloWorld();
 	~HelloWorld();
 
+	C3SButton * btn_music;
 	cocos2d::Point pt[4];
 	cocos2d::Vec2 origin;
 	cocos2d::Size visibleSize;
@@ -32,16 +32,18 @@ public:
 	cocos2d::ui::Text * difficulty_text;
 	cocostudio::ComAudio * bkmusic;
 
-	bool ch_action = true;
+	//bool ch_action = true;
+	bool play_flag = true;
 	bool music_open = true;
 	char diff[3][10] = { "Difficult","Normal","Easy" }; //Level
 	int level = 1;
+	float bkvolume;
 
-	void action_character();
+	//void action_character();
 
 	//button
 	static cocos2d::Scene* createScene();
-	void doStep(float dt);
+	void doStep(float dt); 
 
 	virtual bool init();
 

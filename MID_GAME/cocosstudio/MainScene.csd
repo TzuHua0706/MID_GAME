@@ -285,7 +285,7 @@
             <FileData Type="PlistSubImage" Path="s101line01.png" Plist="scene101bg.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="MID GAME" CanEdit="False" ActionTag="-968208128" Tag="43" IconVisible="False" LeftMargin="463.9998" RightMargin="464.0002" TopMargin="75.8700" BottomMargin="558.1300" FontSize="80" LabelText="MID GAME" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+          <AbstractNodeData Name="MID GAME" ActionTag="-968208128" Tag="43" IconVisible="False" LeftMargin="463.9998" RightMargin="464.0002" TopMargin="75.8700" BottomMargin="558.1300" FontSize="80" LabelText="MID GAME" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
             <Size X="352.0000" Y="86.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="639.9998" Y="601.1300" />
@@ -297,7 +297,7 @@
             <OutlineColor A="255" R="144" G="238" B="144" />
             <ShadowColor A="255" R="255" G="255" B="255" />
           </AbstractNodeData>
-          <AbstractNodeData Name="difficulty" ActionTag="2039636629" Tag="46" IconVisible="False" LeftMargin="570.0000" RightMargin="570.0000" TopMargin="567.4627" BottomMargin="101.5373" FontSize="48" LabelText="Normal" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+          <AbstractNodeData Name="difficulty" CanEdit="False" ActionTag="2039636629" Tag="46" IconVisible="False" LeftMargin="570.0000" RightMargin="570.0000" TopMargin="567.4627" BottomMargin="101.5373" FontSize="48" LabelText="Normal" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
             <Size X="140.0000" Y="51.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="640.0000" Y="127.0373" />

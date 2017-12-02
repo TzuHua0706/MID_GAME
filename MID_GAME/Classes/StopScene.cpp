@@ -13,6 +13,10 @@ using namespace ui;
 StopScene::StopScene(){}
 StopScene::~StopScene(){
 	removeAllChildren();
+	delete btn_play;
+	delete btn_replay;
+	delete btn_home;
+	delete C_Player;
 }
 bool StopScene::init()
 {
@@ -48,7 +52,7 @@ bool StopScene::init()
 
 	return true;
 }
-void StopScene::get_character(C_character * player, float get_level, RenderTexture* sc) {
+void StopScene::get_character(C_character * player, float get_level, RenderTexture* sc, float volume) {
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Sprite * bg = Sprite::createWithTexture(sc->getSprite()->getTexture());
 	bg->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2));
@@ -57,6 +61,7 @@ void StopScene::get_character(C_character * player, float get_level, RenderTextu
 	this->addChild(bg);
 	C_Player = new C_character(player->Player, player->Color);
 	Level = get_level;
+	bkvolume = volume;
 }
 bool StopScene::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)//Ä²¸I¶}©l¨Æ¥ó
 {
@@ -82,7 +87,7 @@ void StopScene::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) //Ä
 	if(btn_play->touch_flag){
 		btn_play->end();
 		GameScene * layer = GameScene::create();
-		layer->bkmusic->playBackgroundMusic();
+		layer->bkmusic->setBackgroundMusicVolume(bkvolume);
 		Director::sharedDirector()->popScene();
 	}
 	if (btn_replay->touch_flag) {
@@ -90,7 +95,7 @@ void StopScene::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) //Ä
 		removeAllChildren();
 		Scene * scene = Scene::create();
 		GameScene * layer = GameScene::create();
-		layer->get_character(C_Player, Level);
+		layer->get_character(C_Player, Level, bkvolume);
 		scene->addChild(layer);
 		Director::sharedDirector()->replaceScene(scene);
 	}

@@ -12,13 +12,17 @@ class SettingScene : public cocos2d::Layer
 {
 private:
 	C3SButton * btn_x;
+	cocos2d::ui::Slider * slider_bkmusic;
 public:
 	SettingScene();
 	~SettingScene();
 
+	float m_percent = 100;
+
 	virtual bool init();
 
 	void get_bg(cocos2d::RenderTexture* sc);
+	void get_slider(float percent);
 	void sliderEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
 
 	//Ä²¸I

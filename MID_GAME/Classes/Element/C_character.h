@@ -7,13 +7,18 @@
 
 #include "basic.h"
 
-class C_character
+class C_character : public cocos2d::Node
 {
 private:
 public:
 	C_character(const char * player, cocos2d::Color3B color);
 	~C_character();
 
+	bool music_open = true;
+	bool ch_action = true;
+	bool jump_flag = true;
+	bool R_flag = true;
+	unsigned int eid;
 	const char * Player;
 	cocos2d::Color3B Color;
 	cocos2d::Node * character;
@@ -22,11 +27,15 @@ public:
 	cocos2d::Node * sad;
 	cocos2d::Node * happy;
 	cocos2d::Node * normal;
+	cocos2d::Node * sad_eye;
 	cocostudio::timeline::ActionTimeline * ac_character;
 
-	cocos2d::Node * set_character(bool select);
-	cocos2d::Spawn * ani_character(int scale);//scale  2程 1い丁 0程
-	cocos2d::EaseOut * jump();
+	void set_character(bool select);
+	void ani_character(int scale);//scale  2程 1い丁 0程
+	void action_character();
+	void jump(float Volume);
+	void jumpFinished();
+	void RFinished();
 	void face_character(int face);//face 0:normal 1:happy 2:sad
 
 };
