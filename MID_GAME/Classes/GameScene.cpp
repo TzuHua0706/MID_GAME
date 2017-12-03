@@ -96,7 +96,7 @@ bool GameScene::init()
 	loading_game->setPercent(100);
 
 	//Jump
-	jump = Rect(origin.x - 50, origin.y - 100, visibleSize.width - 100, visibleSize.height - 100);
+	rectjump = Rect(origin.x, origin.y - 100, visibleSize.width, visibleSize.height - 100);
 
 	//Touch
 	_listener1 = EventListenerTouchOneByOne::create();
@@ -201,7 +201,7 @@ void GameScene::doStep(float dt)
 bool GameScene::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)//觸碰開始事件
 {
 	Point touchLoc = pTouch->getLocation();
-	if (jump.containsPoint(touchLoc)) {
+	if (rectjump.containsPoint(touchLoc)) {
 		auto m = bkmusic->getBackgroundMusicVolume();
 		C_player->jump(m);
 	}

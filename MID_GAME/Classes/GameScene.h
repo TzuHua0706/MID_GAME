@@ -27,7 +27,7 @@ public:
 	cocos2d::ui::Text * score_text;
 	cocos2d::ui::LoadingBar * blood;
 	cocos2d::ui::LoadingBar * loading_game;
-	cocos2d::Rect jump;
+	cocos2d::Rect rectjump;
 	cocos2d::Rect rect_ch;
 	cocos2d::Vec2 origin;
 	cocos2d::Size visibleSize;
